@@ -74,6 +74,7 @@ $config = [
 		                'GET me'            =>  'me',
 		                'GET profile'            =>  'me',
 		                'POST me'           =>  'me-update',
+		                'POST logout'           =>  'logout',
 		                'POST profile'           =>  'me-update',
 		                'OPTIONS me'        =>  'options',
 		                'OPTIONS profile'        =>  'options',

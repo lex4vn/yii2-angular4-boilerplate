@@ -625,6 +625,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public function destroyAccessToken(){
+        // generate access token
+//        $this->access_token = Yii::$app->security->generateRandomString();
+        $this->access_token = null;   // Token
+        $this->access_token_expired_at = date("Y-m-d H:i:s", time()); // Expired
+        $this->save(false);
+
+    }
+
     public function beforeSave($insert)
     {
         // Convert username to lower case
