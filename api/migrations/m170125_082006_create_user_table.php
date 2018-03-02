@@ -43,7 +43,7 @@ class m170125_082006_create_user_table extends Migration
             'avatar_width'      => $this->integer(11)->null(),
 
             'created_at'        => Schema::TYPE_TIMESTAMP. ' DEFAULT CURRENT_TIMESTAMP',
-            'updated_at'        => Schema::TYPE_TIMESTAMP. ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+            'updated_at'        => Schema::TYPE_TIMESTAMP
         ]);
 
         // creates index for table
