@@ -26,6 +26,17 @@ use yii\web\Request as WebRequest;
  * @property integer $blocked_at
  * @property boolean $status
  * @property integer $role
+ * @property integer $sex
+ * @property date $birth_date
+ * @property string $description
+ * @property string $phone
+ * @property string $unconfirmed_phone
+ * @property string $confirmed_phone_at
+ * @property string $full_name
+ * @property string $avatar
+ * @property string $avatar_height
+ * @property string $avatar_width
+
  * @property integer $created_at
  * @property integer $updated_at
  *
