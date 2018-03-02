@@ -183,7 +183,7 @@
 	        $model->roles = [
 		        User::ROLE_USER,
 	        ];
-            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if ($model->load(Yii::$app->request->post(),'') && $model->login()) {
                 $user = $model->getUser();
                 $user->generateAccessTokenAfterUpdatingClientInfo(true);
 
@@ -321,6 +321,25 @@
 				// Validation error
 				throw new NotFoundHttpException("Object not found");
 			}
+        }
+
+        public function actionProfile() {
+            $user = User::findIdentity(\Yii::$app->user->getId());
+
+            if($user) {
+                $response = \Yii::$app->getResponse();
+                $response->setStatusCode(200);
+
+                return [
+                    'username'  =>  $user->username,
+                    'email'     =>  $user->email,
+                    'last_login_at' =>  $user->last_login_at,
+                    'last_login_ip' =>  $user->last_login_ip,
+                ];
+            } else {
+                // Validation error
+                throw new NotFoundHttpException("Object not found");
+            }
         }
 
         public function actionMeUpdate() {
