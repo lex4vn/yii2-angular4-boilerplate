@@ -33,6 +33,7 @@ use yii\web\Request as WebRequest;
  * @property string $unconfirmed_phone
  * @property string $confirmed_phone_at
  * @property string $full_name
+ * @property string $address
  * @property string $avatar
  * @property string $avatar_height
  * @property string $avatar_width
@@ -47,6 +48,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
 	const ROLE_USER = 10;
 	const ROLE_STAFF = 50;
+	const ROLE_TEACHER = 50;
 	const ROLE_ADMIN = 99;
 
     const STATUS_DELETED = -1;
@@ -110,6 +112,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'role_label'    =>  function() {
                 return $this->getRoleLabel();
             },
+            'full_name',
+            'phone',
+            'address',
             'last_login_at',
             'last_login_ip',
             'confirmed_at',
@@ -841,4 +846,30 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 		return [JWT::encode($token, $secret, static::getAlgo()), $token];
 	}
 
+    public function getFullName(){
+        if($this->full_name){
+            return $this->full_name;
+        }
+        else{
+            return '';
+        }
+    }
+
+    public function getAddress(){
+        if($this->address){
+            return $this->address;
+        }
+        else{
+            return '';
+        }
+    }
+
+    public function getPhone(){
+        if($this->phone){
+            return $this->phone;
+        }
+        else{
+            return '';
+        }
+    }
 }

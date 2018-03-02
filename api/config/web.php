@@ -72,8 +72,11 @@ $config = [
 		                'POST password-reset'       =>  'password-reset',
 		                'OPTIONS password-reset'    =>  'options',
 		                'GET me'            =>  'me',
+		                'GET profile'            =>  'me',
 		                'POST me'           =>  'me-update',
+		                'POST profile'           =>  'me-update',
 		                'OPTIONS me'        =>  'options',
+		                'OPTIONS profile'        =>  'options',
 	                ]
                 ],
                 [

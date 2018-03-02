@@ -311,35 +311,19 @@
 				$response = \Yii::$app->getResponse();
 				$response->setStatusCode(200);
 
-				return [
-					'username'  =>  $user->username,
-					'email'     =>  $user->email,
-					'last_login_at' =>  $user->last_login_at,
-					'last_login_ip' =>  $user->last_login_ip,
-				];
+                return [
+                    'full_name'  =>  $user->getFullName(),
+                    'address'  =>  $user->getAddress(),
+                    'username'  =>  $user->username,
+                    'email'     =>  $user->email,
+                    'phone'     =>  $user->getPhone(),
+                    //'last_login_at' =>  $user->last_login_at,
+                    //'last_login_ip' =>  $user->last_login_ip,
+                ];
 			} else {
 				// Validation error
 				throw new NotFoundHttpException("Object not found");
 			}
-        }
-
-        public function actionProfile() {
-            $user = User::findIdentity(\Yii::$app->user->getId());
-
-            if($user) {
-                $response = \Yii::$app->getResponse();
-                $response->setStatusCode(200);
-
-                return [
-                    'username'  =>  $user->username,
-                    'email'     =>  $user->email,
-                    'last_login_at' =>  $user->last_login_at,
-                    'last_login_ip' =>  $user->last_login_ip,
-                ];
-            } else {
-                // Validation error
-                throw new NotFoundHttpException("Object not found");
-            }
         }
 
         public function actionMeUpdate() {
