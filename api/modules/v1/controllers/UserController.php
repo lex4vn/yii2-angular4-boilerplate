@@ -412,11 +412,18 @@ class UserController extends ActiveController
         if ($user) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(200);
-            return [
-                'emotion' => 1,
-                'content' => 'Funny',
-                'created_at' => '2018-06-04 00:13:29'
-            ];
+
+            $addresses = User::find()->all();
+            $addressesResult = [];
+            foreach($addresses as $address){
+                $addressesResult[] = array(
+                    'name'=> $address->fullName,
+                    'description'=> $address->desc,
+                    'phone'=> $address->phoneNumber,
+                    'avatar_url'=> $address->avatarUrl,
+                );
+            }
+            return $addressesResult;
         } else {
             // Validation error
             throw new NotFoundHttpException("Object not found");
