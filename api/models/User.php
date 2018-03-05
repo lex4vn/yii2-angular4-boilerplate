@@ -873,7 +873,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
-    public function getPhone(){
+    public function getPhoneNumber(){
         if($this->phone){
             return $this->phone;
         }
@@ -882,12 +882,21 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
+    public function getDesc(){
+        if($this->description){
+            return $this->description;
+        }
+        else{
+            return 'Mẹ của bé Nguyễn Bảo Anh';
+        }
+    }
+
     public function getAvatarUrl(){
         if($this->avatar){
             return $this->avatar;
         }
         else{
-            return '';
+            return 'http://avengerapp.com/profile/1231231.jpg';
         }
     }
 }
