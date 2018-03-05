@@ -57,6 +57,7 @@ class UserController extends ActiveController
                 'delete' => ['delete'],
                 'login' => ['post'],
                 'me' => ['get', 'post'],
+                'profile' => ['get', 'post'],
             ],
         ];
 

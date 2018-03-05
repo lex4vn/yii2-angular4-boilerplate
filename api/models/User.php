@@ -881,4 +881,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             return '';
         }
     }
+
+    public function getAvatarUrl(){
+        if($this->avatar){
+            return $this->avatar;
+        }
+        else{
+            return '';
+        }
+    }
 }
