@@ -328,7 +328,8 @@ class UserController extends ActiveController
                 'address' => $user->getAddress(),
                 'username' => $user->username,
                 'email' => $user->email,
-                'phone' => $user->getPhone(),
+                'phone' => $user->getPhoneNumber(),
+                'avatar_url' => $user->getAvatarUrl(),
                 //'last_login_at' =>  $user->last_login_at,
                 //'last_login_ip' =>  $user->last_login_ip,
             ];
