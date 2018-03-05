@@ -119,6 +119,16 @@ $config = [
                 ],
                 [
                     'class'         => 'yii\rest\UrlRule',
+                    'controller'    => 'v1/schedule',
+                    'pluralize'     => false,
+                    'tokens'        => [
+                    ],
+                    'extraPatterns' => [
+                        'GET index'       =>  'index',
+                    ]
+                ],
+                [
+                    'class'         => 'yii\rest\UrlRule',
                     'controller'    => 'v1/setting',
                     'pluralize'     => false,
                     'tokens'        => [

@@ -56,4 +56,37 @@ class Schedule extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDetails()
+    {
+        return $this->hasMany(ScheduleDetail::className(), ['schedule_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchoolClass()
+    {
+        return $this->hasOne(SchoolClass::className(), ['id' => 'class_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacher()
+    {
+        return $this->hasOne(User::className(), ['id' => 'teacher_id']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNote()
+    {
+        return $this->hasOne(Note::className(),  ['schedule_id' => 'id']);
+    }
 }
