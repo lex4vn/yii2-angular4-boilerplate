@@ -81,12 +81,12 @@ class HomeController extends ActiveController
             'rules' => [
                 [
                     'allow' => true,
-                    'actions' => ['index'],
+                    'actions' => ['index','emotion'],
                     'roles' => ['admin', 'manageUsers'],
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['index'],
+                    'actions' => ['index','emotion'],
                     'roles' => ['user']
                 ]
             ],
@@ -149,4 +149,5 @@ class HomeController extends ActiveController
             throw new NotFoundHttpException("Object not found");
         }
     }
+
 }

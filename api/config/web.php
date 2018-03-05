@@ -78,6 +78,8 @@ $config = [
 		                'POST profile'           =>  'me-update',
 		                'OPTIONS me'        =>  'options',
 		                'OPTIONS profile'        =>  'options',
+                        'GET emotion'       =>  'emotion',
+                        'GET addresses'       =>  'addresses',
 	                ]
                 ],
                 [

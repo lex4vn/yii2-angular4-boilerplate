@@ -58,6 +58,8 @@ class UserController extends ActiveController
                 'login' => ['post'],
                 'me' => ['get', 'post'],
                 'profile' => ['get', 'post'],
+                'emotion' => ['get'],
+                'addresses' => ['get'],
             ],
         ];
 
@@ -379,9 +381,45 @@ class UserController extends ActiveController
         return $responseData;
     }
 
-    public
-    function actionOptions($id = null)
+    public function actionOptions($id = null)
     {
         return "ok";
+    }
+
+
+    public function actionEmotion()
+    {
+        $user = User::findIdentity(\Yii::$app->user->getId());
+
+        if ($user) {
+            $response = \Yii::$app->getResponse();
+            $response->setStatusCode(200);
+            return [
+                'emotion' => 1,
+                'content' => 'Funny',
+                'created_at' => '2018-06-04 00:13:29'
+            ];
+        } else {
+            // Validation error
+            throw new NotFoundHttpException("Object not found");
+        }
+    }
+
+    public function actionAddresses()
+    {
+        $user = User::findIdentity(\Yii::$app->user->getId());
+
+        if ($user) {
+            $response = \Yii::$app->getResponse();
+            $response->setStatusCode(200);
+            return [
+                'emotion' => 1,
+                'content' => 'Funny',
+                'created_at' => '2018-06-04 00:13:29'
+            ];
+        } else {
+            // Validation error
+            throw new NotFoundHttpException("Object not found");
+        }
     }
 }
