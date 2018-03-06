@@ -127,7 +127,7 @@ class HomeController extends ActiveController
 
             return [
                 'events' => $eventsResult,
-                'activities' => $activityResult,
+                'activity' => $activityResult,
                 'emotion' => 1
             ];
         } else {
