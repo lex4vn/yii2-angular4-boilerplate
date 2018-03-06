@@ -4,23 +4,12 @@ namespace app\modules\v1\controllers;
 use app\filters\auth\HttpBearerAuth;
 use app\models\Activity;
 use app\models\Event;
-use app\models\LoginForm;
-use app\models\PasswordResetForm;
-use app\models\PasswordResetRequestForm;
-use app\models\PasswordResetTokenVerificationForm;
-use app\models\SignupConfirmForm;
-use app\models\SignupForm;
 use app\models\User;
-use app\models\UserEditForm;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\auth\CompositeAuth;
-use yii\helpers\Url;
 use yii\rest\ActiveController;
-use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\ServerErrorHttpException;
 
 class HomeController extends ActiveController
 {
@@ -81,12 +70,12 @@ class HomeController extends ActiveController
             'rules' => [
                 [
                     'allow' => true,
-                    'actions' => ['index','emotion'],
+                    'actions' => ['index', 'emotion'],
                     'roles' => ['admin', 'manageUsers'],
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['index','emotion'],
+                    'actions' => ['index', 'emotion'],
                     'roles' => ['user']
                 ]
             ],
@@ -104,44 +93,41 @@ class HomeController extends ActiveController
             $response->setStatusCode(200);
             $events = Event::find()->limit(3)->all();
             $eventsResult = [];
-            foreach($events as $event){
+            foreach ($events as $event) {
                 $eventsResult[] = array(
-                    'id'=> $event->id,
-                    'name'=> $event->name,
-                    'description'=> $event->description,
-                    'event_time'=> $event->event_time,
-                    'teacher_id'=> $event->teacher_id,
-                    'teacher_name'=> $event->teacher->fullName,
-                    'class_id'=> $event->class_id,
-                    'class_name'=> $event->schoolClass->name,
-                    'school_id'=> $event->school_id,
-                    'school_name'=> $event->school->name,
-                    'status'=> $event->status,
+                    'id' => $event->id,
+                    'name' => $event->name,
+                    'description' => $event->description,
+                    'event_time' => $event->event_time,
+                    'teacher_id' => $event->teacher_id,
+                    'teacher_name' => $event->teacher->fullName,
+                    'class_id' => $event->class_id,
+                    'class_name' => $event->schoolClass->name,
+                    'school_id' => $event->school_id,
+                    'school_name' => $event->school->name,
+                    'status' => $event->status,
                 );
             }
 
-            $activities = Activity::find()->limit(3)->all();
-            $activitiesResult = [];
+            $activity = Activity::find()->one();
 
-            foreach($activities as $activity){
+            $images = $activity->activityAttachments;
 
-                $images = $activity->activityAttachments;
+            $activityResult = array(
+                'id' => $activity->id,
+                'title' => $activity->title,
+                'class_id' => $activity->title,
+                'class_name' => $activity->schoolClass->name,
+                'teacher_id' => $activity->teacher_id,
+                'teacher_name' => $activity->teacher->fullName,
+                'status' => $activity->status,
+                'created_at' => $activity->created_at,
+                'images' => $images,
+            );
 
-                $activitiesResult[] = array(
-                    'id'=> $activity->id,
-                    'title'=> $activity->title,
-                    'class_id'=> $activity->title,
-                    'class_name'=> $activity->schoolClass->name,
-                    'teacher_id'=> $activity->teacher_id,
-                    'teacher_name'=> $activity->teacher->fullName,
-                    'status'=> $activity->status,
-                    'created_at'=> $activity->created_at,
-                    'images'=> $images,
-                );
-            }
             return [
                 'events' => $eventsResult,
-                'activities' => $activitiesResult,
+                'activities' => $activityResult,
                 'emotion' => 1
             ];
         } else {
