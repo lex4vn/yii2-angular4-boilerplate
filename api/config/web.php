@@ -99,6 +99,21 @@ $config = [
                 ],
                 [
                     'class'         => 'yii\rest\UrlRule',
+                    'controller'    => 'v1/teacher',
+                    'pluralize'     => false,
+                    'tokens' => [
+                        '{id}'             => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'OPTIONS {id}'              =>  'options',
+                        'POST login'                =>  'login',
+                        'OPTIONS login'             =>  'options',
+                        'GET get-permissions'       =>  'get-permissions',
+                        'OPTIONS get-permissions'   =>  'options',
+                    ]
+                ],
+                [
+                    'class'         => 'yii\rest\UrlRule',
                     'controller'    => 'v1/home',
                     'pluralize'     => false,
                     'tokens'        => [

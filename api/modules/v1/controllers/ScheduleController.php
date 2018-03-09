@@ -113,7 +113,7 @@ class ScheduleController extends ActiveController
                     'note' => $schedule->note->note,
                 );
             } else {
-                return array();
+                return null;
             }
         } else {
             // Validation error
