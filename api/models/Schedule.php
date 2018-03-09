@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $title
  * @property string $description
- * @property string $schedule_time
+ * @property date $schedule_date
  * @property int $teacher_id
  * @property int $class_id
  * @property int $school_id
@@ -34,7 +34,7 @@ class Schedule extends \yii\db\ActiveRecord
         return [
             [['title', 'description'], 'required'],
             [['description'], 'string'],
-            [['schedule_time'], 'safe'],
+            //[['schedule_date'], 'safe'],
             [['teacher_id', 'class_id', 'school_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 512],
         ];
@@ -49,7 +49,7 @@ class Schedule extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'description' => 'Description',
-            'schedule_time' => 'Schedule Time',
+            'schedule_date' => 'Schedule Time',
             'teacher_id' => 'Teacher ID',
             'class_id' => 'Class ID',
             'school_id' => 'School ID',
