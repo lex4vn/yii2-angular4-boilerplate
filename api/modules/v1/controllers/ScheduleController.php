@@ -113,7 +113,7 @@ class ScheduleController extends ActiveController
                     'note' => $schedule->note->note,
                 );
             } else {
-                throw new NotFoundHttpException("Schedule not found date: $date");
+                return array();
             }
         } else {
             // Validation error
