@@ -2,10 +2,10 @@
 namespace app\modules\v1\controllers;
 
 use app\filters\auth\HttpBearerAuth;
-use app\models\Activity;
 use app\models\Schedule;
 use app\models\User;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\auth\CompositeAuth;
 use yii\rest\ActiveController;
@@ -13,8 +13,7 @@ use yii\web\NotFoundHttpException;
 
 class ScheduleController extends ActiveController
 {
-    public $modelClass = 'app\models\User';
-
+    public $modelClass = 'app\models\Schedule';
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
@@ -42,6 +41,7 @@ class ScheduleController extends ActiveController
             'class' => \yii\filters\VerbFilter::className(),
             'actions' => [
                 'index' => ['get'],
+                'schedules' => ['get'],
             ],
         ];
 
@@ -70,7 +70,7 @@ class ScheduleController extends ActiveController
             'rules' => [
                 [
                     'allow' => true,
-                    'actions' => ['index'],
+                    'actions' => ['index', 'schedules'],
                     'roles' => ['admin', 'manageUsers'],
                 ],
                 [
@@ -87,28 +87,20 @@ class ScheduleController extends ActiveController
     public function actionIndex()
     {
         $user = User::findIdentity(\Yii::$app->user->getId());
-        $page_size = Yii::$app->request->get('page_size');
-        $page_index = Yii::$app->request->get('page_index');
-        if (!$page_size) {
-            $page_size = 10;
-        }
 
-        if (!$page_index) {
-            $page_index = 1;
+        $date = Yii::$app->request->get('date');
+        if (!$date) {
+            $date = date('Y-m-d');
         }
-
-        $index = $page_size * ($page_index - 1);
 
         if ($user) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(200);
 
-            $schedules = Schedule::find()->limit($page_size)->offset($index)->all();
-            $schedulesResult = [];
+            $schedule = Schedule::find()->where(['schedule_date'=>$date])->one();
 
-            foreach ($schedules as $schedule) {
-
-                $schedulesResult[] = array(
+            if ($schedule) {
+                return array(
                     'id' => $schedule->id,
                     'title' => $schedule->title,
                     'class_id' => $schedule->class_id,
@@ -116,16 +108,30 @@ class ScheduleController extends ActiveController
                     'teacher_id' => $schedule->teacher_id,
                     'teacher_name' => $schedule->teacher->fullName,
                     'status' => $schedule->status,
-                    'schedule_time' => $schedule->schedule_time,
+                    'schedule_date' => $schedule->schedule_date,
                     'details' => $schedule->details,
                     'note' => $schedule->note->note,
                 );
+            } else {
+                throw new NotFoundHttpException("Schedule not found date: $date");
             }
-            return $schedulesResult;
         } else {
             // Validation error
             throw new NotFoundHttpException("Object not found");
         }
     }
 
+    public function actionSchedules()
+    {
+        return new ActiveDataProvider([
+            'query' => Schedule::find()->where([
+                '!=', 'status', -1
+            ])
+        ]);
+    }
+
+    public function actionOptions($id = null)
+    {
+        return "ok";
+    }
 }
