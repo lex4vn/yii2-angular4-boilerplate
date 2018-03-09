@@ -125,6 +125,8 @@ $config = [
                     ],
                     'extraPatterns' => [
                         'GET index'       =>  'index',
+                        'GET schedules'       =>  'schedules',
+                        'OPTIONS schedules'    =>  'options',
                     ]
                 ],
                 [
@@ -135,6 +137,18 @@ $config = [
                     ],
                     'extraPatterns' => [
                         'GET index'       =>  'index',
+                    ]
+                ],
+                [
+                    'class'         => 'yii\rest\UrlRule',
+                    'controller'    => 'v1/article',
+                    'pluralize'     => false,
+                    'tokens' => [
+                        '{id}'             => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'GET index'       =>  'index',
+                        'OPTIONS {id}'              =>  'options',
                     ]
                 ],
                 [
