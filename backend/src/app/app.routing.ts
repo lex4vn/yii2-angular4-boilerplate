@@ -27,6 +27,10 @@ export const routes: Routes = [
                 loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
             },
             {
+                path: 'schedule',
+                loadChildren: 'app/schedule/schedule.module#ScheduleModule'
+            },
+            {
                 path: 'staff',
                 loadChildren: 'app/staff/staff.module#StaffModule'
             },

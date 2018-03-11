@@ -30,6 +30,7 @@ import {SharedModule} from './shared/shared.module';
 import {GlobalService} from './model/global.service';
 import {StaffService} from './model/staff.service';
 import {StaffDataService} from './model/staff-data.service';
+import {ScheduleDataService} from './model/schedule-data.service';
 import {UserDataService} from './model/user-data.service';
 import {SettingDataService} from './model/setting-data.service';
 
@@ -65,6 +66,7 @@ import {SettingDataService} from './model/setting-data.service';
         SettingDataService,
         StaffDataService,
         UserDataService,
+        ScheduleDataService
     ],
     bootstrap: [AppComponent]
 })

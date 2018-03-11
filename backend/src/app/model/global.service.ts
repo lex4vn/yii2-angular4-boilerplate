@@ -11,9 +11,9 @@ export class GlobalService{
 
     constructor(){
         if(environment.production == true) {
-            this.apiHost = 'http://api.boilerplate.local/v1';
+            this.apiHost = 'http://avengerapp.com/v1';
         } else {
-            this.apiHost = 'http://api.boilerplate.local/v1';
+            this.apiHost = 'http://localhost/kidschool/api/web/v1';
         }
     }
 
