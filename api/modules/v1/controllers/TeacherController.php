@@ -91,7 +91,7 @@
 			        ],
 					[
 						'allow' => true,
-						'actions' => ['view'],
+						'actions' => ['view','index'],
 						'roles' => ['user']
 					]
 		        ],
@@ -121,13 +121,28 @@
 		 * @return ActiveDataProvider
 		 */
 		public function actionIndex(){
-			return new ActiveDataProvider([
-				'query' =>  User::find()->where([
-					'!=', 'status', -1
-				])->andWhere([
-					'in', 'role', [User::ROLE_STAFF, User::ROLE_ADMIN]
-				])
-			]);
+			$user = User::findIdentity(\Yii::$app->user->getId());
+			//TODO relate teacher_id
+			$id = 2;
+			$staff = User::find()->where([
+				'id'    =>  $id
+			])->andWhere([
+				'!=', 'status', -1
+			])->andWhere([
+				'in', 'role', [User::ROLE_TEACHER]
+			])->one();
+			if($staff){
+				return [
+					'full_name' => $staff->getFullName(),
+					'address' => $staff->getAddress(),
+					'username' => $staff->username,
+					'email' => $staff->email,
+					'phone' => $staff->getPhoneNumber(),
+					'avatar_url' => $staff->getAvatarUrl(),
+				];
+			} else {
+				return null;
+			}
 		}
 	    /**
 	     * Return requested staff member information
@@ -162,6 +177,7 @@
 	     * @throws NotFoundHttpException
 	     */
         public function actionView($id){
+			$user = User::findIdentity(\Yii::$app->user->getId());
             $staff = User::find()->where([
 	            'id'    =>  $id
             ])->andWhere([
