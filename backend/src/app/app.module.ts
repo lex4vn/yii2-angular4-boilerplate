@@ -33,6 +33,8 @@ import {StaffDataService} from './model/staff-data.service';
 import {ScheduleDataService} from './model/schedule-data.service';
 import {UserDataService} from './model/user-data.service';
 import {SettingDataService} from './model/setting-data.service';
+import {EventDataService} from './model/event-data.service';
+import { NoteComponent } from './note/note.component';
 
 @NgModule({
     imports: [
@@ -54,6 +56,7 @@ import {SettingDataService} from './model/setting-data.service';
         AsideToggleDirective,
         SmartResizeDirective,
         P404Component,
+        NoteComponent,
     ],
     providers: [
         {
@@ -66,7 +69,8 @@ import {SettingDataService} from './model/setting-data.service';
         SettingDataService,
         StaffDataService,
         UserDataService,
-        ScheduleDataService
+        ScheduleDataService,
+        EventDataService
     ],
     bootstrap: [AppComponent]
 })

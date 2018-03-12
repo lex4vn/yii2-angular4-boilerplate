@@ -2,6 +2,7 @@
 namespace app\modules\v1\controllers;
 
 use app\filters\auth\HttpBearerAuth;
+use app\helper\FirebaseHelper;
 use app\models\Activity;
 use app\models\Post;
 use app\models\User;
@@ -124,6 +125,18 @@ class PostController extends ActiveController
             // Validation error
             throw new NotFoundHttpException("Object not found");
         }
+    }
+
+    public function actionCreate()
+    {
+
+        $response = \Yii::$app->getResponse();
+        $response->setStatusCode(200);
+
+        $service = new FirebaseHelper(['authKey' => 'YOUR_KEY']);
+        $tokens  = []; // Device token
+        $service->sendNotification($tokens, 'Test notification');
+        return 1;
     }
 
 }

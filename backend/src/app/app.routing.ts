@@ -30,17 +30,25 @@ export const routes: Routes = [
                 path: 'schedule',
                 loadChildren: 'app/schedule/schedule.module#ScheduleModule'
             },
-            {
-                path: 'staff',
-                loadChildren: 'app/staff/staff.module#StaffModule'
-            },
-            {
-                path: 'user',
-                loadChildren: 'app/user/user.module#UserModule'
-            },
+            //{
+            //    path: 'staff',
+            //    loadChildren: 'app/staff/staff.module#StaffModule'
+            //},
+            //{
+            //    path: 'user',
+            //    loadChildren: 'app/user/user.module#UserModule'
+            //},
             {
                 path: 'setting',
                 loadChildren: 'app/setting/setting.module#SettingModule'
+            },
+            {
+                path: 'event',
+                loadChildren: 'app/event/event.module#EventModule'
+            },
+            {
+                path: 'note',
+                loadChildren: 'app/note/note.module#NoteModule'
             }
         ]
     },
