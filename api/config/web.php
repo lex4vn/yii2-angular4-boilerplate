@@ -114,6 +114,17 @@ $config = [
                 ],
                 [
                     'class'         => 'yii\rest\UrlRule',
+                    'controller'    => 'v1/clazz',
+                    'pluralize'     => false,
+                    'tokens' => [
+                        '{id}'             => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'OPTIONS {id}'      =>  'options',
+                    ]
+                ],
+                [
+                    'class'         => 'yii\rest\UrlRule',
                     'controller'    => 'v1/home',
                     'pluralize'     => false,
                     'tokens'        => [

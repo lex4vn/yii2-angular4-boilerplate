@@ -27,17 +27,25 @@ export const routes: Routes = [
                 loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
             },
             {
+                path: 'class',
+                loadChildren: 'app/clazz/clazz.module#ClazzModule'
+            },
+            {
                 path: 'schedule',
                 loadChildren: 'app/schedule/schedule.module#ScheduleModule'
             },
-            //{
-            //    path: 'staff',
-            //    loadChildren: 'app/staff/staff.module#StaffModule'
-            //},
-            //{
-            //    path: 'user',
-            //    loadChildren: 'app/user/user.module#UserModule'
-            //},
+            {
+                path: 'teacher',
+                loadChildren: 'app/teacher/teacher.module#TeacherModule'
+            },
+             {
+                path: 'staff',
+                loadChildren: 'app/staff/staff.module#StaffModule'
+            },
+            {
+                path: 'user',
+                loadChildren: 'app/user/user.module#UserModule'
+            },
             {
                 path: 'setting',
                 loadChildren: 'app/setting/setting.module#SettingModule'
