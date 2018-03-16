@@ -5,7 +5,7 @@ import {SharedModule} from '../shared/shared.module';
 import {ParentListComponent} from './parent-list.component';
 import {ParentFormComponent} from './parent-form.component';
 import {ParentRoutingModule} from './parent-routing.module';
-import { Base64UploadComponent } from '../base64-upload/base64-upload.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -14,8 +14,7 @@ import { Base64UploadComponent } from '../base64-upload/base64-upload.component'
     ],
     declarations: [
         ParentListComponent,
-        ParentFormComponent,
-        Base64UploadComponent
+        ParentFormComponent
     ]
 })
 export class ParentModule { }
