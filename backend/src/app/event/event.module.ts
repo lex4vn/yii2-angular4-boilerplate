@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventFormComponent } from './event-form/event-form.component';
+import {SharedModule} from '../shared/shared.module';
+
+import { EventFormComponent } from './event-form.component';
+import { EventListComponent } from './event-list.component';
 import {EventRoutingModule} from './event-routing.module';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     EventRoutingModule
   ],
-  declarations: [EventFormComponent]
+  declarations: [
+    EventFormComponent,
+    EventListComponent,
+  ]
 })
 export class EventModule { }

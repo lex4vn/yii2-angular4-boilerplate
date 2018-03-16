@@ -16,6 +16,10 @@ use Yii;
  */
 class Note extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = -1;
+    const STATUS_DISABLED = 0;
+    const STATUS_PENDING = 1;
+    const STATUS_ACTIVE = 10;
     /**
      * @inheritdoc
      */

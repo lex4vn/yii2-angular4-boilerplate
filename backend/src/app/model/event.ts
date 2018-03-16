@@ -1,8 +1,8 @@
 export class Event {
     id:number;
-    title:string;
+    name:string;
     description:string;
-    schedule_time:string;
+    event_time:string;
     teacher_id:number;
     class_id:number;
     school_id:number;

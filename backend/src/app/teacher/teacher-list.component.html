@@ -4,15 +4,15 @@
     </div>
 </div>
 
-<div class="animated fadeIn" *ngIf="!_staffs && !_errorMessage">
+<div class="animated fadeIn" *ngIf="!_teachers && !_errorMessage">
     <span class="spinner"></span>
 </div>
-<div class="animated fadeIn" *ngIf="_staffs">
+<div class="animated fadeIn" *ngIf="_teachers">
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Staffs
+                    <i class="fa fa-align-justify"></i> Teachers
                 </div>
                 <div class="card-block">
                     <div class="table-responsive">
@@ -29,52 +29,52 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let staff of _staffs">
+                            <tr *ngFor="let teacher of _teachers">
                                 <td class="text-xs-center">
-                                    {{staff.id}}
+                                    {{teacher.id}}
                                 </td>
                                 <td>
-                                    {{staff.username}}
+                                    {{teacher.username}}
                                 </td>
                                 <td>
-                                    <p *ngIf="staff.confirmed_at == null">
-                                        {{staff.unconfirmed_email}}
+                                    <p *ngIf="teacher.confirmed_at == null">
+                                        {{teacher.unconfirmed_email}}
                                         <br /><span class="help-text text-danger">(Not Confirmed)</span>
                                     </p>
-                                    <p *ngIf="staff.confirmed_at != null">
-                                        {{staff.email}}
-                                        <br /><span class="help-text" title="{{staff.confirmed_at}}">({{staff.confirmed_at | amTimeAgo}})</span>
+                                    <p *ngIf="teacher.confirmed_at != null">
+                                        {{teacher.email}}
+                                        <br /><span class="help-text" title="{{teacher.confirmed_at}}">({{teacher.confirmed_at | amTimeAgo}})</span>
                                     </p>
                                 </td>
                                 <td class="text-xs-center">
-                                    <span *ngIf="staff.last_login_ip == null" class="help-text">Never Logged In</span>
-                                    <p *ngIf="staff.last_login_ip != null" class="help-text" title="{{staff.last_login_at}}">{{staff.last_login_ip}}<br />({{staff.last_login_at | amTimeAgo}})</p>
+                                    <span *ngIf="teacher.last_login_ip == null" class="help-text">Never Logged In</span>
+                                    <p *ngIf="teacher.last_login_ip != null" class="help-text" title="{{teacher.last_login_at}}">{{teacher.last_login_ip}}<br />({{teacher.last_login_at | amTimeAgo}})</p>
                                 </td>
                                 <!--<td class="text-xs-center">-->
-                                    <!--<span *ngIf="staff.blocked_at == null" class="help-text text-success">Not Blocked</span>-->
-                                    <!--<span *ngIf="staff.blocked_at != null" class="text-danger">Blocked since {{staff.blocked_at}}</span>-->
+                                    <!--<span *ngIf="teacher.blocked_at == null" class="help-text text-success">Not Blocked</span>-->
+                                    <!--<span *ngIf="teacher.blocked_at != null" class="text-danger">Blocked since {{teacher.blocked_at}}</span>-->
                                 <!--</td>-->
                                 <td class="text-xs-center">
-                                    <div *ngIf="staff.blocked_at == null">
+                                    <div *ngIf="teacher.blocked_at == null">
                                         <span [ngClass]="{
-                                            'text-success': staff.status == 10,
-                                            'text-info': staff.status == 1,
-                                            'text-danger': staff.status == 0 || staff.status == -1
-                                        }">{{staff.status_label}}</span>
+                                            'text-success': teacher.status == 10,
+                                            'text-info': teacher.status == 1,
+                                            'text-danger': teacher.status == 0 || teacher.status == -1
+                                        }">{{teacher.status_label}}</span>
 
-                                        <br /><span class="help-text" title="{{staff.updated_at}}">({{staff.updated_at | amTimeAgo}})</span>
+                                        <br /><span class="help-text" title="{{teacher.updated_at}}">({{teacher.updated_at | amTimeAgo}})</span>
                                     </div>
-                                    <div *ngIf="staff.blocked_at != null">
-                                        <span *ngIf="staff.blocked_at != null" class="text-danger" title="{{staff.blocked_at}}">Blocked since {{staff.blocked_at | amTimeAgo}}</span>
+                                    <div *ngIf="teacher.blocked_at != null">
+                                        <span *ngIf="teacher.blocked_at != null" class="text-danger" title="{{teacher.blocked_at}}">Blocked since {{teacher.blocked_at | amTimeAgo}}</span>
                                     </div>
 
                                 </td>
                                 <td class="text-xs-center">
-                                    <div *ngIf="staff.status != -1">
-                                        <button class="btn btn-primary btn-sm" type="button" (click)="viewStaff(staff)">
+                                    <div *ngIf="teacher.status != -1">
+                                        <button class="btn btn-primary btn-sm" type="button" (click)="viewTeacher(teacher)">
                                             <i class="fa fa-edit"></i> Edit
                                         </button>
-                                        <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteStaff(staff)">
+                                        <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteTeacher(teacher)">
                                             <i class="fa fa-remove"></i> Remove
                                         </button>
                                     </div>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/staff', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Staff</a>
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/teacher', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Teacher</a>
                 </div>
             </div>
         </div>

@@ -5,9 +5,11 @@ use app\filters\auth\HttpBearerAuth;
 use app\models\Activity;
 use app\models\User;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\auth\CompositeAuth;
 use yii\rest\ActiveController;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 
 class ActivityController extends ActiveController
@@ -41,6 +43,7 @@ class ActivityController extends ActiveController
             'class' => \yii\filters\VerbFilter::className(),
             'actions' => [
                 'index' => ['get'],
+                'activities' => ['get'],
             ],
         ];
 
@@ -65,16 +68,16 @@ class ActivityController extends ActiveController
         // setup access
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index'], //only be applied to
+            'only' => ['index','activities'], //only be applied to
             'rules' => [
                 [
                     'allow' => true,
-                    'actions' => ['index'],
+                    'actions' => ['index','activities'],
                     'roles' => ['admin', 'manageUsers'],
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['index'],
+                    'actions' => ['index','activities'],
                     'roles' => ['user']
                 ]
             ],
@@ -128,4 +131,90 @@ class ActivityController extends ActiveController
         }
     }
 
+    public function actionActivities()
+    {
+        return new ActiveDataProvider([
+            'query' => Activity::find()->where([
+                '!=', 'status', -1
+            ])
+//                ->andWhere([
+//                'role' => User::ROLE_USER
+//            ])
+        ]);
+    }
+
+    public function actionView($id)
+    {
+        $activity = Activity::find()->where([
+            'id' => $id
+        ])->andWhere([
+            '!=', 'status', -1
+        ])
+//            ->andWhere([
+//            'role' => User::ROLE_USER
+//        ])
+            ->one();
+
+
+        if ($activity) {
+            return $activity;
+        } else {
+            throw new NotFoundHttpException("Object not found: $id");
+        }
+    }
+
+    public function actionCreate()
+    {
+        $model = new Activity();
+        $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
+
+        if ($model->validate() && $model->save()) {
+            $response = \Yii::$app->getResponse();
+            $response->setStatusCode(201);
+            $id = implode(',', array_values($model->getPrimaryKey(true)));
+            $response->getHeaders()->set('Location', Url::toRoute([$id], true));
+        } else {
+            // Validation error
+            throw new HttpException(422, json_encode($model->errors));
+        }
+
+        return $model;
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->actionView($id);
+
+        $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
+
+        if ($model->validate() && $model->save()) {
+            $response = \Yii::$app->getResponse();
+            $response->setStatusCode(200);
+        } else {
+            // Validation error
+            throw new HttpException(422, json_encode($model->errors));
+        }
+
+        return $model;
+    }
+
+    public function actionDelete($id)
+    {
+        $model = $this->actionView($id);
+
+        $model->status = Activity::STATUS_DELETED;
+
+        if ($model->save(false) === false) {
+            throw new ServerErrorHttpException('Failed to delete the object for unknown reason.');
+        }
+
+        $response = \Yii::$app->getResponse();
+        $response->setStatusCode(204);
+        return "ok";
+    }
+
+    public function actionOptions($id = null)
+    {
+        return "ok";
+    }
 }

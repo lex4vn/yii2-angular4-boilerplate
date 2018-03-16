@@ -21,7 +21,7 @@ $config = [
             'enableAutoLogin' => true,
         ],
         'authManager' => [
-	        'class' => 'yii\rbac\DbManager',
+            'class' => 'yii\rbac\DbManager',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -49,156 +49,198 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             'rules' => [
-                'ping'  =>  'site/ping',
+                'ping' => 'site/ping',
                 [
-	                'class'         => 'yii\rest\UrlRule',
-	                'controller'    => 'v1/user',
-	                'pluralize'     => false,
-	                'tokens' => [
-		                '{id}'             => '<id:\d+>',
-	                ],
-	                'extraPatterns' => [
-		                'OPTIONS {id}'      =>  'options',
-		                'POST login'        =>  'login',
-		                'OPTIONS login'     =>  'options',
-		                'POST signup'       =>  'signup',
-		                'OPTIONS signup'    =>  'options',
-		                'POST confirm'      =>  'confirm',
-		                'OPTIONS confirm'   =>  'options',
-		                'POST password-reset-request'       =>  'password-reset-request',
-		                'OPTIONS password-reset-request'    =>  'options',
-		                'POST password-reset-token-verification'       =>  'password-reset-token-verification',
-		                'OPTIONS password-reset-token-verification'    =>  'options',
-		                'POST password-reset'       =>  'password-reset',
-		                'OPTIONS password-reset'    =>  'options',
-		                'GET me'            =>  'me',
-		                'GET profile'            =>  'me',
-		                'POST me'           =>  'me-update',
-		                'POST logout'           =>  'logout',
-		                'POST profile'           =>  'me-update',
-		                'OPTIONS me'        =>  'options',
-		                'OPTIONS profile'        =>  'options',
-                        'GET emotion'       =>  'emotion',
-                        'GET addresses'       =>  'addresses',
-	                ]
-                ],
-                [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/staff',
-                    'pluralize'     => false,
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/user',
+                    'pluralize' => false,
                     'tokens' => [
-                        '{id}'             => '<id:\d+>',
+                        '{id}' => '<id:\d+>',
                     ],
                     'extraPatterns' => [
-                        'OPTIONS {id}'              =>  'options',
-                        'POST login'                =>  'login',
-                        'OPTIONS login'             =>  'options',
-                        'GET get-permissions'       =>  'get-permissions',
-                        'OPTIONS get-permissions'   =>  'options',
+                        'OPTIONS {id}' => 'options',
+                        'POST login' => 'login',
+                        'OPTIONS login' => 'options',
+                        'POST signup' => 'signup',
+                        'OPTIONS signup' => 'options',
+                        'POST confirm' => 'confirm',
+                        'OPTIONS confirm' => 'options',
+                        'POST password-reset-request' => 'password-reset-request',
+                        'OPTIONS password-reset-request' => 'options',
+                        'POST password-reset-token-verification' => 'password-reset-token-verification',
+                        'OPTIONS password-reset-token-verification' => 'options',
+                        'POST password-reset' => 'password-reset',
+                        'OPTIONS password-reset' => 'options',
+                        'GET me' => 'me',
+                        'GET profile' => 'me',
+                        'POST me' => 'me-update',
+                        'POST logout' => 'logout',
+                        'POST profile' => 'me-update',
+                        'OPTIONS me' => 'options',
+                        'OPTIONS profile' => 'options',
+                        'GET emotion' => 'emotion',
+                        'GET addresses' => 'addresses',
                     ]
                 ],
                 [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/teacher',
-                    'pluralize'     => false,
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/note',
+                    'pluralize' => false,
                     'tokens' => [
-                        '{id}'             => '<id:\d+>',
+                        '{id}' => '<id:\d+>',
                     ],
                     'extraPatterns' => [
-                        'OPTIONS {id}'              =>  'options',
-                        'POST login'                =>  'login',
-                        'OPTIONS login'             =>  'options',
-                        'GET get-permissions'       =>  'get-permissions',
-                        'OPTIONS get-permissions'   =>  'options',
+                        'OPTIONS {id}' => 'options',
                     ]
                 ],
                 [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/clazz',
-                    'pluralize'     => false,
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/staff',
+                    'pluralize' => false,
                     'tokens' => [
-                        '{id}'             => '<id:\d+>',
+                        '{id}' => '<id:\d+>',
                     ],
                     'extraPatterns' => [
-                        'OPTIONS {id}'      =>  'options',
+                        'OPTIONS {id}' => 'options',
+                        'POST login' => 'login',
+                        'OPTIONS login' => 'options',
+                        'GET get-permissions' => 'get-permissions',
+                        'OPTIONS get-permissions' => 'options',
                     ]
                 ],
                 [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/home',
-                    'pluralize'     => false,
-                    'tokens'        => [
-                    ],
-                    'extraPatterns' => [
-                        'GET index'       =>  'index',
-                    ]
-                ],
-                [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/activity',
-                    'pluralize'     => false,
-                    'tokens'        => [
-                    ],
-                    'extraPatterns' => [
-                        'GET index'       =>  'index',
-                    ]
-                ],
-                [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/schedule',
-                    'pluralize'     => false,
-                    'tokens'        => [
-                    ],
-                    'extraPatterns' => [
-                        'GET index'       =>  'index',
-                        'GET schedules'       =>  'schedules',
-                        'OPTIONS schedules'    =>  'options',
-                    ]
-                ],
-                [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/post',
-                    'pluralize'     => false,
-                    'tokens'        => [
-                    ],
-                    'extraPatterns' => [
-                        'GET index'       =>  'index',
-                    ]
-                ],
-                [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/article',
-                    'pluralize'     => false,
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/teacher',
+                    'pluralize' => false,
                     'tokens' => [
-                        '{id}'             => '<id:\d+>',
+                        '{id}' => '<id:\d+>',
                     ],
                     'extraPatterns' => [
-                        'GET index'       =>  'index',
-                        'OPTIONS {id}'              =>  'options',
+                        'OPTIONS {id}' => 'options',
+                        'GET list' => 'list',
+                        'OPTIONS list' => 'options',
+                        'POST login' => 'login',
+                        'OPTIONS login' => 'options',
+                        'GET get-permissions' => 'get-permissions',
+                        'OPTIONS get-permissions' => 'options',
                     ]
                 ],
                 [
-                    'class'         => 'yii\rest\UrlRule',
-                    'controller'    => 'v1/setting',
-                    'pluralize'     => false,
-                    'tokens'        => [
-                        '{id}'             => '<id:\d+>',
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/clazz',
+                    'pluralize' => false,
+                    'tokens' => [
+                        '{id}' => '<id:\d+>',
                     ],
                     'extraPatterns' => [
-                        'GET public'       =>  'public',
-                        'OPTIONS public'    =>  'options',
+                        'OPTIONS {id}' => 'options',
                     ]
                 ],
                 [
-	                'class'         => 'yii\rest\UrlRule',
-	                'controller'    => 'v1/page',
-	                'pluralize'     => false,
-	                'tokens'        => [
-	                ],
-	                'extraPatterns' => [
-		                'GET sse'       =>  'sse',
-		                'OPTIONS sse'    =>  'sse',
-	                ]
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/home',
+                    'pluralize' => false,
+                    'tokens' => [
+                    ],
+                    'extraPatterns' => [
+                        'GET index' => 'index',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/activity',
+                    'pluralize' => false,
+                    'tokens' => [
+                        '{id}' => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'GET index' => 'index',
+                        'OPTIONS {id}' => 'options',
+                        'GET activities' => 'activities',
+                        'OPTIONS activities' => 'options',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/schedule',
+                    'pluralize' => false,
+                    'tokens' => [
+                    ],
+                    'extraPatterns' => [
+                        'GET index' => 'index',
+                        'GET schedules' => 'schedules',
+                        'OPTIONS schedules' => 'options',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/parent',
+                    'pluralize' => false,
+                    'tokens' => [
+                        '{id}' => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'GET index' => 'index',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/event',
+                    'pluralize' => false,
+                    'tokens' => [
+                    ],
+                    'extraPatterns' => [
+                        'GET index' => 'index',
+                        'GET events' => 'events',
+                        'OPTIONS events' => 'options',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/post',
+                    'pluralize' => false,
+                    'tokens' => [
+                    ],
+                    'extraPatterns' => [
+                        'GET index' => 'index',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/article',
+                    'pluralize' => false,
+                    'tokens' => [
+                        '{id}' => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'GET index' => 'index',
+                        'GET list' => 'list',
+                        'OPTIONS {id}' => 'options',
+                        'OPTIONS list' => 'options',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/setting',
+                    'pluralize' => false,
+                    'tokens' => [
+                        '{id}' => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'GET public' => 'public',
+                        'OPTIONS public' => 'options',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/page',
+                    'pluralize' => false,
+                    'tokens' => [
+                    ],
+                    'extraPatterns' => [
+                        'GET sse' => 'sse',
+                        'OPTIONS sse' => 'sse',
+                    ]
                 ],
             ]
         ],
@@ -207,28 +249,28 @@ $config = [
             'on beforeSend' => function ($event) {
 
                 $response = $event->sender;
-                if($response->format == 'html') {
+                if ($response->format == 'html') {
                     return $response;
                 }
 
                 $responseData = $response->data;
 
-                if(is_string($responseData) && json_decode($responseData)) {
+                if (is_string($responseData) && json_decode($responseData)) {
                     $responseData = json_decode($responseData, true);
                 }
 
 
-                if($response->statusCode >= 200 && $response->statusCode <= 299) {
+                if ($response->statusCode >= 200 && $response->statusCode <= 299) {
                     $response->data = [
-                        'success'   => true,
-                        'status'    => $response->statusCode,
-                        'data'      => $responseData,
+                        'success' => true,
+                        'status' => $response->statusCode,
+                        'data' => $responseData,
                     ];
                 } else {
                     $response->data = [
-                        'success'   => false,
-                        'status'    => $response->statusCode,
-                        'data'      => $responseData,
+                        'success' => false,
+                        'status' => $response->statusCode,
+                        'data' => $responseData,
                     ];
 
                 }
@@ -236,7 +278,7 @@ $config = [
             },
         ],
         'sse' => [
-	        'class' => \odannyc\Yii2SSE\LibSSE::class
+            'class' => \odannyc\Yii2SSE\LibSSE::class
         ]
 
     ],

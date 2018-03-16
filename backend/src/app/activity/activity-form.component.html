@@ -1,0 +1,128 @@
+<div class="row" *ngIf="_errorMessage">
+    <div class="col-sm-12">
+        <p class="alert alert-danger">{{_errorMessage}}</p>
+    </div>
+</div>
+<div class="animated fadeIn" *ngIf="!_mode && !_errorMessage">
+    <span class="spinner"></span>
+
+</div>
+<div class="animated fadeIn" *ngIf="_mode">
+    <div class="row">
+        <div class="col-sm-12">
+            <form [formGroup]="_form" (ngSubmit)="onSubmit()">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-create" *ngIf="_mode == 'create'">
+                            <strong>Create new activity</strong>
+                        </div>
+                        <div class="update" *ngIf="_mode == 'update'">
+                            <strong>Schedule - {{_activity.title}}</strong><br />
+                            <small>Update activity</small>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('title')}">
+                                <label class="col-sm-12" for="title">Title <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="title" placeholder="Enter title" [formControl]="_form.controls['title']" [ngClass]="{'form-control-danger': !_isValid('title')}" [(ngModel)]="_activity.title" />
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.title.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.title.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Title only allows alphanumeric, underscore and dashboard between 3 and 15 characters.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="teacher_id">Teacher <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="teacher_id" [formControl]="_form.controls['teacher_id']" [ngClass]="{'form-control-danger': !_isValid('teacher_id')}" [(ngModel)]="_activity.teacher_id">
+                                        <option *ngFor="let teacher of _teachers" [value]="teacher.value" [selected]="">{{teacher.label}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.teacher_id.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.teacher_id.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Teacher of class.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="class_id">Class <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="class_id" [formControl]="_form.controls['class_id']" [ngClass]="{'form-control-danger': !_isValid('class_id')}" [(ngModel)]="_activity.class_id">
+                                        <option *ngFor="let clazz of _clazzes" [value]="clazz.value" [selected]="">{{clazz.label}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.class_id.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.class_id.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Class.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('created_at')}">
+                                <label class="col-sm-12" for="created_at">Confirmed At (Y-M-D H:M)</label>
+                                <div class="col-sm-6">
+                                    <timepicker id="created_at" [placeholderText]="'Click to set the date and time for confirming the activity'" [dateTime]="_activity.created_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('created_at', $event)"></timepicker>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.created_at.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.created_at.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Confirmed at field indicates the activity has been confirmed. If empty, then activity cannot log in to the system as the account is not confirmed. The value must be valid format - Y/M/D H:M:S. i.e. 2017-01-01 12:00:00</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="status">Status <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="status" [formControl]="_form.controls['status']" [ngClass]="{'form-control-danger': !_isValid('status')}" [(ngModel)]="_activity.status">
+                                        <option *ngFor="let statusType of _statusTypes" [value]="statusType.value" [selected]="">{{statusType.label}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.status.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.status.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Status field is configuring whether the activity is active or disabled.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Save</button>
+                                <div *ngIf="_submitted" class="spinner"></div>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a [routerLink]="['/activity']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Back to list</a>
+                            </div>
+                            <div *ngIf="_errorMessage" class="col-xs-12 error-block mt-h">
+                                <div class="alert alert-danger">{{_errorMessage}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

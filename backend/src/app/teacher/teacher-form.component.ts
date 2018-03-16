@@ -7,10 +7,9 @@ import {FormGroup, FormBuilder, Validators, FormArray} from "@angular/forms";
 
 import {TeacherDataService} from "../model/teacher-data.service";
 import {Teacher} from "../model/teacher";
-import {TeacherService} from "../model/teacher.service";
+import {StaffService} from "../model/staff.service";
 
 import * as moment from "moment";
-import * as _ from "underscore";
 
 @Component({
     templateUrl: './teacher-form.component.html',
@@ -35,7 +34,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
     private _roleTypes:any = {};
 
     constructor(private _teacherDataService:TeacherDataService,
-                private _teacherService:TeacherService,
+                private _staffService:StaffService,
                 private _router:Router,
                 private _activatedRoute:ActivatedRoute,
                 private _formBuilder:FormBuilder) {
@@ -151,7 +150,6 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
         this._resetFormErrors();
         this._resetTeacher();
 
-
         // _route is activated route service. this._route.params is observable.
         // subscribe is method that takes function to retrieve parameters when it is changed.
         this._parameters = this._activatedRoute.params.subscribe(params => {
@@ -168,7 +166,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                         error => {
                             // unauthorized access
                             if(error.status == 401 || error.status == 403) {
-                                this._teacherService.unauthorizedAccess(error);
+                                this._staffService.unauthorizedAccess(error);
                             } else {
                                 this._errorMessage = error.data.message;
                             }
@@ -192,7 +190,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                         error => {
                             // unauthorized access
                             if(error.status == 401 || error.status == 403) {
-                                this._teacherService.unauthorizedAccess(error);
+                                this._staffService.unauthorizedAccess(error);
                             } else {
                                 this._errorMessage = error.data.message;
                             }
@@ -229,7 +227,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                         }
                         // Unauthorized Access
                         if(error.status == 401 || error.status == 403) {
-                            this._teacherService.unauthorizedAccess(error);
+                            this._staffService.unauthorizedAccess(error);
                         }
                         // All other errors
                         else {
@@ -257,7 +255,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                         }
                         // Unauthorized Access
                         else if(error.status == 401 || error.status == 403) {
-                            this._teacherService.unauthorizedAccess(error);
+                            this._staffService.unauthorizedAccess(error);
                         }
                         // All other errors
                         else {

@@ -36,9 +36,10 @@ use yii\helpers\Url;
  */
 class Article extends ActiveRecord
 {
-    const STATUS_PUBLISHED = 1;
-    const STATUS_DRAFT = 0;
-
+    const STATUS_DELETED = -1;
+    const STATUS_DISABLED = 0;
+    const STATUS_PENDING = 1;
+    const STATUS_ACTIVE = 10;
     /**
      * @var array
      */
@@ -128,20 +129,20 @@ class Article extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'slug' => Yii::t('common', 'Slug'),
-            'title' => Yii::t('common', 'Title'),
-            'summary'   => Yii::t('common', 'Summary'),
-            'body' => Yii::t('common', 'Body'),
-            'view' => Yii::t('common', ''),
-            'thumbnail' => Yii::t('common', 'Thumbnail'),
-            'category_id' => Yii::t('common', 'Category'),
-            'status' => Yii::t('common', 'Published'),
-            'published_at' => Yii::t('common', 'Published At'),
-            'created_by' => Yii::t('common', 'Author'),
-            'updated_by' => Yii::t('common', 'Updater'),
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At')
+            'id' => 'ID',
+            'slug' => 'Slug',
+            'title' => 'Title',
+            'summary'   => 'Summary',
+            'body' => 'Body',
+            'view' => '',
+            'thumbnail' => 'Thumbnail',
+            'category_id' => 'Category',
+            'status' => 'Published',
+            'published_at' => 'Published At',
+            'created_by' => 'Author',
+            'updated_by' => 'Updater',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At'
         ];
     }
 

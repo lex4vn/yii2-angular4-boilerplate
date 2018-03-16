@@ -4,7 +4,7 @@ import swal, {SweetAlertOptions} from 'sweetalert2';
 
 import {TeacherDataService} from "../model/teacher-data.service";
 import {Teacher} from "../model/teacher";
-import {TeacherService} from "../model/teacher.service";
+import {StaffService} from "../model/staff.service";
 
 @Component({
     templateUrl: './teacher-list.component.html',
@@ -14,7 +14,7 @@ export class TeacherListComponent implements OnInit{
     private _errorMessage:string;
 
     constructor(private _teacherDataService:TeacherDataService,
-                private _teacherService:TeacherService,
+                private _staffService:StaffService,
                 private _router:Router) {}
 
     ngOnInit() {
@@ -31,7 +31,7 @@ export class TeacherListComponent implements OnInit{
                 error =>  {
                     // unauthorized access
                     if(error.status == 401 || error.status == 403) {
-                        this._teacherService.unauthorizedAccess(error);
+                        this._staffService.unauthorizedAccess(error);
                     } else {
                         this._errorMessage = error.data.message;
                     }
@@ -70,7 +70,7 @@ export class TeacherListComponent implements OnInit{
                             error =>  {
                                 // unauthorized access
                                 if(error.status == 401 || error.status == 403) {
-                                    parent._teacherService.unauthorizedAccess(error);
+                                    parent._staffService.unauthorizedAccess(error);
                                 } else {
                                     parent._errorMessage = error.data.message;
                                 }

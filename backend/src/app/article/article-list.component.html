@@ -1,0 +1,72 @@
+<div class="row" *ngIf="_errorMessage">
+    <div class="col-sm-12">
+        <p class="alert alert-danger">{{_errorMessage}}</p>
+    </div>
+</div>
+
+<div class="animated fadeIn" *ngIf="!_articles && !_errorMessage">
+    <span class="spinner"></span>
+</div>
+<div class="animated fadeIn" *ngIf="_articles">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Articles
+                </div>
+                <div class="card-block">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <tr>
+                                <th class="text-xs-center">ID</th>
+                                <th>title</th>
+                                <th width="15%" class="text-xs-center">Status</th>
+                                <th width="20%" class="text-xs-center">Functions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let article of _articles">
+                                <td class="text-xs-center">
+                                    {{article.id}}
+                                </td>
+                                <td>
+                                    {{article.title}}
+                                </td>
+
+                                <!--<td class="text-xs-center">-->
+                                <!--<span *ngIf="article.blocked_at == null" class="help-text text-success">Not Blocked</span>-->
+                                <!--<span *ngIf="article.blocked_at != null" class="text-danger">Blocked since {{article.blocked_at}}</span>-->
+                                <!--</td>-->
+                                <td class="text-xs-center">
+                                    <span [ngClass]="{
+                                        'text-success': article.status == 10,
+                                        'text-info': article.status == 1,
+                                        'text-danger': article.status == 0 || article.status == -1
+                                    }">{{article.status}}</span>
+                                </td>
+                                <td class="text-xs-center">
+                                    <div *ngIf="article.status != -1">
+                                        <button class="btn btn-primary btn-sm" type="button"
+                                                (click)="viewArticle(article)">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" type="button"
+                                                (click)="confirmDeleteArticle(article)">
+                                            <i class="fa fa-remove"></i> Remove
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/article', 'create']" routerLinkActive="active"><i
+                            class="fa fa-plus-square"></i> Create New Article</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

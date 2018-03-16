@@ -35,6 +35,10 @@ export const routes: Routes = [
                 loadChildren: 'app/schedule/schedule.module#ScheduleModule'
             },
             {
+                path: 'activity',
+                loadChildren: 'app/activity/activity.module#ActivityModule'
+            },
+            {
                 path: 'teacher',
                 loadChildren: 'app/teacher/teacher.module#TeacherModule'
             },
@@ -47,6 +51,10 @@ export const routes: Routes = [
                 loadChildren: 'app/user/user.module#UserModule'
             },
             {
+                path: 'parent',
+                loadChildren: 'app/parent/parent.module#ParentModule'
+            },
+            {
                 path: 'setting',
                 loadChildren: 'app/setting/setting.module#SettingModule'
             },
@@ -57,6 +65,10 @@ export const routes: Routes = [
             {
                 path: 'note',
                 loadChildren: 'app/note/note.module#NoteModule'
+            },
+            {
+                path: 'article',
+                loadChildren: 'app/article/article.module#ArticleModule'
             }
         ]
     },

@@ -59,7 +59,7 @@ export class NoteDataService {
     let headers = this.getHeaders();
 
     return this._authHttp.put(
-            this._globalService.apiHost+'/note/'+note.schedule_id,
+            this._globalService.apiHost+'/note/'+note.id,
         JSON.stringify(note),
         {
           headers: headers
@@ -83,7 +83,7 @@ export class NoteDataService {
     let headers = this.getHeaders();
 
     return this._authHttp.get(
-            this._globalService.apiHost+'/note/notes',
+            this._globalService.apiHost+'/note',
         {
           headers: headers
         }
@@ -142,5 +142,41 @@ export class NoteDataService {
       }
     ];
   }
+    public static getTeachers():Array<any>{
+        return [
+            {
+                label: 'Cô Trang',
+                value: 1
+            },
+            {
+                label: 'Cô Ly',
+                value: 2
+            }
+        ];
+    }
 
+    public static getSchedules():Array<any>{
+        return [
+            {
+                label: 'Schedule 1',
+                value: 1
+            },
+            {
+                label: 'Schedule 2',
+                value: 2
+            }
+        ];
+    }
+    public static getKids():Array<any>{
+        return [
+            {
+                label: 'Tuấn Kiệt',
+                value: 1
+            },
+            {
+                label: 'Anh Minh',
+                value: 2
+            }
+        ];
+    }
 }

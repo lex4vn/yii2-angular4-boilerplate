@@ -74,11 +74,11 @@ class ArticleCategory extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'slug' => Yii::t('common', 'Slug'),
-            'title' => Yii::t('common', 'Title'),
-            'parent_id' => Yii::t('common', 'Parent Category'),
-            'status' => Yii::t('common', 'Active')
+            'id' => 'ID',
+            'slug' => 'Slug',
+            'title' => 'Title',
+            'parent_id' => 'Parent Category',
+            'status' => 'Active'
         ];
     }
 

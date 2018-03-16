@@ -110,7 +110,7 @@
                 'query' =>  User::find()->where([
 	                '!=', 'status', -1
                 ])->andWhere([
-	                'in', 'role', [User::ROLE_STAFF, User::ROLE_ADMIN]
+	                'in', 'role', [User::ROLE_TEACHER]
                 ])
             ]);
         }

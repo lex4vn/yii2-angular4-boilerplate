@@ -1,0 +1,105 @@
+<div class="row" *ngIf="_errorMessage">
+    <div class="col-sm-12">
+        <p class="alert alert-danger">{{_errorMessage}}</p>
+    </div>
+</div>
+
+<div class="animated fadeIn" *ngIf="!_parents && !_errorMessage">
+    <span class="spinner"></span>
+</div>
+<div class="animated fadeIn" *ngIf="_parents">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Users
+                </div>
+                <div class="card-block">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <tr>
+                                <th class="text-xs-center">ID</th>
+                                <th>Avatar</th>
+                                <th>Username</th>
+                                <th>Email Address<br >(Confirmed At)</th>
+                                <th>Kid</th>
+
+                                <th width="15%" class="text-xs-center">Last Login</th>
+
+                                <th width="15%" class="text-xs-center">Status<br />(Last Updated At)</th>
+                                <th width="20%" class="text-xs-center">Functions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let parent of _parents">
+                                <td class="text-xs-center">
+                                    {{parent.id}}
+                                </td>
+                                <td class="text-xs-center">
+                                    <img src="http://localhost/kidschool/api/web/{{parent.avatar}}" width="64px" />
+                                </td>
+                                <td>
+                                    {{parent.username}}
+                                </td>
+
+                                <td>
+                                    <p *ngIf="parent.confirmed_at == null">
+                                        {{parent.unconfirmed_email}}
+                                        <br /><span class="help-text text-danger">(Not Confirmed)</span>
+                                    </p>
+                                    <p *ngIf="parent.confirmed_at != null">
+                                        {{parent.email}}
+                                        <br /><span class="help-text" title="{{parent.confirmed_at}}">({{parent.confirmed_at | amTimeAgo}})</span>
+                                    </p>
+                                </td>
+
+                                <td>
+                                    {{parent.kid_id}}
+                                </td>
+
+                                <td class="text-xs-center">
+                                    <span *ngIf="parent.last_login_ip == null" class="help-text">Never Logged In</span>
+                                    <p *ngIf="parent.last_login_ip != null" class="help-text" title="{{parent.last_login_at}}">{{parent.last_login_ip}}<br />({{parent.last_login_at | amTimeAgo}})</p>
+                                </td>
+                                <!--<td class="text-xs-center">-->
+                                    <!--<span *ngIf="parent.blocked_at == null" class="help-text text-success">Not Blocked</span>-->
+                                    <!--<span *ngIf="parent.blocked_at != null" class="text-danger">Blocked since {{parent.blocked_at}}</span>-->
+                                <!--</td>-->
+                                <td class="text-xs-center">
+                                    <div *ngIf="parent.blocked_at == null">
+                                        <span [ngClass]="{
+                                            'text-success': parent.status == 10,
+                                            'text-info': parent.status == 1,
+                                            'text-danger': parent.status == 0 || parent.status == -1
+                                        }">{{parent.status_label}}</span>
+
+                                        <br /><span class="help-text" title="{{parent.updated_at}}">({{parent.updated_at | amTimeAgo}})</span>
+                                    </div>
+                                    <div *ngIf="parent.blocked_at != null">
+                                        <span *ngIf="parent.blocked_at != null" class="text-danger" title="{{parent.blocked_at}}">Blocked since {{parent.blocked_at | amTimeAgo}}</span>
+                                    </div>
+
+                                </td>
+                                <td class="text-xs-center">
+                                    <div *ngIf="parent.status != -1">
+                                        <button class="btn btn-primary btn-sm" type="button" (click)="viewParent(parent)">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteParent(parent)">
+                                            <i class="fa fa-remove"></i> Remove
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/parent', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Parent</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

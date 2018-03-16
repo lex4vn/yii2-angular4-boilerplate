@@ -140,6 +140,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             },
             'created_at',
             'updated_at',
+            'avatar',
         ];
 
 		// If role is staff and admin, then return permissions
@@ -149,7 +150,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
 			    /** @var Permission[] $availablePermissions */
 			    $availablePermissions = $authManager->getPermissions();
-
 
 			    /** @var array $tmpPermissions to store permissions assigned to the staff*/
                 $tmpPermissions = [];
@@ -233,6 +233,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
+
             ['email', 'string', 'max' => 255],
             ['email', 'validateEmail'],
             ['password', 'string', 'min' => 6],
@@ -247,6 +248,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
 			['permissions', 'validatePermissions'],
             [['access_token', 'permissions'], 'safe'],
+            ['avatar', 'string'],
         ];
     }
 

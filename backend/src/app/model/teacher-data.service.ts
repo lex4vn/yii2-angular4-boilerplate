@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Rx';
 
 import {GlobalService} from './global.service';
-import {TeacherService} from './teacher.service';
+import {StaffService} from "../model/staff.service";
 import {Teacher} from './teacher';
 import {AuthHttp} from 'angular2-jwt';
 
@@ -16,7 +16,7 @@ import {AuthHttp} from 'angular2-jwt';
 export class TeacherDataService {
 
     constructor(private _globalService:GlobalService,
-                private _teacherService:TeacherService,
+                private _staffService:StaffService,
                 private _authHttp: AuthHttp){
     }
 
@@ -76,7 +76,7 @@ export class TeacherDataService {
     private getHeaders():Headers {
         return new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+this._teacherService.getToken(),
+            'Authorization': 'Bearer '+this._staffService.getToken(),
         });
     }
     // GET /v1/teacher/list

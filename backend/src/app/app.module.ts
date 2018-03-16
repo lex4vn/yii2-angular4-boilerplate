@@ -33,10 +33,13 @@ import {StaffDataService} from './model/staff-data.service';
 import {TeacherDataService} from './model/teacher-data.service';
 import {ScheduleDataService} from './model/schedule-data.service';
 import {UserDataService} from './model/user-data.service';
+import {ParentDataService} from './model/parent-data.service';
 import {ClazzDataService} from './model/clazz-data.service';
 import {SettingDataService} from './model/setting-data.service';
 import {EventDataService} from './model/event-data.service';
-import { NoteComponent } from './note/note.component';
+import {NoteDataService} from './model/note-data.service';
+import {ArticleDataService} from './model/article-data.service';
+import {ActivityDataService} from './model/activity-data.service';
 
 @NgModule({
     imports: [
@@ -57,8 +60,7 @@ import { NoteComponent } from './note/note.component';
         SIDEBAR_TOGGLE_DIRECTIVES,
         AsideToggleDirective,
         SmartResizeDirective,
-        P404Component,
-        NoteComponent,
+        P404Component
     ],
     providers: [
         {
@@ -72,8 +74,12 @@ import { NoteComponent } from './note/note.component';
         StaffDataService,
         TeacherDataService,
         UserDataService,
+        ParentDataService,
         ClazzDataService,
         ScheduleDataService,
+        ActivityDataService,
+        NoteDataService,
+        ArticleDataService,
         EventDataService
     ],
     bootstrap: [AppComponent]
