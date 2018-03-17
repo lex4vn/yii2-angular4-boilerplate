@@ -346,16 +346,23 @@ class UserController extends ActiveController
         if ($user) {
 
             $model = new UserEditForm();
-            $model->load(Yii::$app->request->post());
+            $model->load(Yii::$app->request->post(),'');
             $model->id = $user->id;
 
             if ($model->validate() && $model->save()) {
                 $response = \Yii::$app->getResponse();
                 $response->setStatusCode(200);
-
-                $responseData = "true";
-
-                return $responseData;
+                $user = $model->getUserByID();
+                return [
+                    'full_name' => $user->getFullName(),
+                    'address' => $user->getAddress(),
+                    'username' => $user->username,
+                    'email' => $user->email,
+                    'phone' => $user->getPhoneNumber(),
+                    'avatar_url' => $user->getAvatarUrl(),
+                    //'last_login_at' =>  $user->last_login_at,
+                    //'last_login_ip' =>  $user->last_login_ip,
+                ];
             } else {
                 // Validation error
                 throw new HttpException(422, json_encode($model->errors));

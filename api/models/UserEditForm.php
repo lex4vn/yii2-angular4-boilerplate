@@ -15,6 +15,10 @@
         public $id;
         public $password;
         public $email;
+        public $address;
+        public $phone;
+        public $avatar;
+        public $full_name;
 
         /** @var User */
         private $_user = false;
@@ -31,8 +35,11 @@
                     'blocked_at IS NULL'
                 ], 'message' => 'The ID is not valid.'],
                 ['email', 'trim'],
-                ['email', 'required'],
+                //['email', 'required'],
                 ['email', 'email'],
+                ['address', 'string'],
+                ['phone', 'string'],
+                ['full_name', 'string'],
                 ['email', 'string', 'max' => 255],
                 ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => Yii::t('app', 'This email address has already been taken.'), 'filter' => function($query){
                     $query->andWhere(['!=', 'id', $this->id]);
@@ -55,22 +62,37 @@
 				// if user email has been changed, then put the email in unconfirmed_email and set confirmed_at as null
 				$updateIndicator = false;
 				if($this->_user->email != $this->email) {
-					$this->_user->unconfirmed_email = $this->email;
-					$this->_user->confirmed_at = null;
-					$this->_user->status = User::STATUS_PENDING;
-					$this->_user->generateAuthKey();
+					//$this->_user->unconfirmed_email = $this->email;
+					//$this->_user->confirmed_at = null;
+					//$this->_user->status = User::STATUS_PENDING;
+					//$this->_user->generateAuthKey();
 					$updateIndicator = true;
 				}
 
 				// If password is not null, then update password
-				if($this->password != '') {
+				if($this->password) {
 					$updateIndicator = true;
 					$this->_user->setPassword($this->password);
 				}
 
-				if($updateIndicator == true && $this->_user->save(false)) {
+                if($this->phone) {
+                    $updateIndicator = true;
+                    $this->_user->phone = $this->phone;
+                }
+
+                if($this->address) {
+                    $updateIndicator = true;
+                    $this->_user->address = $this->address;
+                }
+
+                if($this->full_name) {
+                    $updateIndicator = true;
+                    $this->_user->full_name = $this->full_name;
+                }
+
+                if($updateIndicator == true && $this->_user->save(false)) {
 					// Send confirmation email
-					$this->sendConfirmationEmail();
+					//$this->sendConfirmationEmail();
 					return true;
 				}
 				elseif($updateIndicator == false){
