@@ -40,6 +40,7 @@
                 ['address', 'string'],
                 ['phone', 'string'],
                 ['full_name', 'string'],
+                ['avatar', 'string'],
                 ['email', 'string', 'max' => 255],
                 ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => Yii::t('app', 'This email address has already been taken.'), 'filter' => function($query){
                     $query->andWhere(['!=', 'id', $this->id]);
@@ -88,6 +89,20 @@
                 if($this->full_name) {
                     $updateIndicator = true;
                     $this->_user->full_name = $this->full_name;
+                }
+
+                if($this->avatar) {
+                    $updateIndicator = true;
+                    // requires php5
+                    define('UPLOAD_DIR', 'images/avatar/');
+
+                    $img = $this->avatar;
+                    $img = str_replace('data:image/png;base64,', '', $img);
+                    $img = str_replace(' ', '+', $img);
+                    $data = base64_decode($img);
+                    $file = UPLOAD_DIR . uniqid() . '.png';
+                    $success = file_put_contents($file, $data);
+                    $this->_user->avatar =  $success ? $file : '';
                 }
 
                 if($updateIndicator == true && $this->_user->save(false)) {

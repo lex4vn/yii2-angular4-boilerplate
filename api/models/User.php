@@ -895,7 +895,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function getAvatarUrl(){
         if($this->avatar){
-            return $this->avatar;
+            return 'http://avengerapp.com/'.$this->avatar;
         }
         else{
             return 'http://avengerapp.com/profile/1231231.jpg';
