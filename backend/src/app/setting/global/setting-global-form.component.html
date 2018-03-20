@@ -138,11 +138,11 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Save</button>
+                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Lưu</button>
                                 <div *ngIf="_submitted" class="spinner"></div>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a [routerLink]="['/setting', 'global']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Back to list</a>
+                                <a [routerLink]="['/setting', 'global']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
                             </div>
                             <div *ngIf="_errorMessage" class="col-xs-12 error-block mt-h">
                                 <div class="alert alert-danger">{{_errorMessage}}</div>

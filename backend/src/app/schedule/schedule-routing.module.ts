@@ -8,28 +8,28 @@ const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Schedules'
+            title: 'Thời khóa biểu'
         },
         children: [
             {
                 path: 'list',
                 component: ScheduleListComponent,
                 data: {
-                    title: 'List',
+                    title: 'Danh sách',
                 }
             },
             {
                 path: 'create',
                 component: ScheduleFormComponent,
                 data: {
-                    title: 'Create'
+                    title: 'Tạo mới'
                 }
             },
             {
                 path: ':id',
                 component: ScheduleFormComponent,
                 data: {
-                    title: 'Update'
+                    title: 'Cập nhật'
                 }
             },
             {

@@ -6,7 +6,7 @@
     ----------------------------
     form.component.html
 
-     <timepicker id="confirmed_at" [placeholderText]="'Click to set the date and time for confirming the user'" [dateTime]="_user.confirmed_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('confirmed_at', $event)"></timepicker>
+     <timepicker id="confirmed_at" [placeholderText]="'Nhấp để chọn ngày và giờ xác nhận the user'" [dateTime]="_user.confirmed_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('confirmed_at', $event)"></timepicker>
     ----------------------------
     form.component.ts
 

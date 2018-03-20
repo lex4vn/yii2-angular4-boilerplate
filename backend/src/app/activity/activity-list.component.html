@@ -20,13 +20,13 @@
                             <thead>
                             <tr>
                                 <th class="text-xs-center">ID</th>
-                                <th>Title</th>
-                                <th>Teacher</th>
-                                <th>Class</th>
+                                <th>Tiêu đề</th>
+                                <th>Giáo viên</th>
+                                <th>Lớp học</th>
 
                                 <th width="15%" class="text-xs-center">Create at</th>
 
-                                <th width="20%" class="text-xs-center">Function</th>
+                                <th width="20%" class="text-xs-center">Chức năng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,10 +49,10 @@
                                 <td class="text-xs-center">
                                     <div *ngIf="activity.status != -1">
                                         <button class="btn btn-primary btn-sm" type="button" (click)="viewActivity(activity)">
-                                            <i class="fa fa-edit"></i> Edit
+                                            <i class="fa fa-edit"></i> Sửa
                                         </button>
                                         <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteActivity(activity)">
-                                            <i class="fa fa-remove"></i> Remove
+                                            <i class="fa fa-remove"></i> Xóa
                                         </button>
                                     </div>
                                 </td>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/activity', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Activity</a>
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/activity', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới Activity</a>
                 </div>
             </div>
         </div>

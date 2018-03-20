@@ -8,28 +8,28 @@ const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Parents'
+            title: 'Phụ huynh'
         },
         children: [
             {
                 path: 'list',
                 component: ParentListComponent,
                 data: {
-                    title: 'List',
+                    title: 'Danh sách',
                 }
             },
             {
                 path: 'create',
                 component: ParentFormComponent,
                 data: {
-                    title: 'Create'
+                    title: 'Tạo mới'
                 }
             },
             {
                 path: ':id',
                 component: ParentFormComponent,
                 data: {
-                    title: 'Update'
+                    title: 'Cập nhật'
                 }
             },
             {

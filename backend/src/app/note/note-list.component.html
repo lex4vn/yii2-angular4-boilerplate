@@ -24,7 +24,7 @@
                 <th>Schedule</th>
                 <th>Kid</th>
                 <th width="15%" class="text-xs-center">Created at</th>
-                <th width="20%" class="text-xs-center">Functions</th>
+                <th width="20%" class="text-xs-center">Chức năng</th>
               </tr>
               </thead>
               <tbody>
@@ -47,10 +47,10 @@
                 <td class="text-xs-center">
                   <div *ngIf="note.status != -1">
                     <button class="btn btn-primary btn-sm" type="button" (click)="viewNote(note)">
-                      <i class="fa fa-edit"></i> Edit
+                      <i class="fa fa-edit"></i> Sửa
                     </button>
                     <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteNote(note)">
-                      <i class="fa fa-remove"></i> Remove
+                      <i class="fa fa-remove"></i> Xóa
                     </button>
                   </div>
                 </td>
@@ -60,7 +60,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <a class="btn btn-primary btn-sm" [routerLink]="['/note', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Note</a>
+          <a class="btn btn-primary btn-sm" [routerLink]="['/note', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới Note</a>
         </div>
       </div>
     </div>

@@ -15,21 +15,21 @@ const routes: Routes = [
                 path: 'list',
                 component: ArticleListComponent,
                 data: {
-                    title: 'List',
+                    title: 'Danh sách',
                 }
             },
             {
                 path: 'create',
                 component: ArticleFormComponent,
                 data: {
-                    title: 'Create'
+                    title: 'Tạo mới'
                 }
             },
             {
                 path: ':id',
                 component: ArticleFormComponent,
                 data: {
-                    title: 'Update'
+                    title: 'Cập nhật'
                 }
             },
             {

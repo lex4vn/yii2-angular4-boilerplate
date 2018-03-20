@@ -43,10 +43,11 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
         this._form = _formBuilder.group({
             name: ['', Validators.compose([
                 Validators.required,
-                Validators.pattern('^[A-Za-z0-9_-]$'),
+                CustomValidators.rangeLength([3, 15]),
+                Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
             ])],
             description: ['', Validators.compose([
-                Validators.required,
+                //Validators.required,
             ])],
             school_id: ['', Validators.compose([
                 Validators.required,
@@ -94,17 +95,19 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
     }
 
     private _isValid(field):boolean {
-        let isValid:boolean = true;
+
+        let isValid:boolean = false;
 
         // If the field is not touched and invalid, it is considered as initial loaded form. Thus set as true
-        //if(this._form.controls[field].touched == false) {
-        //    isValid = true;
-        //}
+        if(this._form.controls[field].touched == false) {
+            isValid = true;
+        }
         // If the field is touched and valid value, then it is considered as valid.
-        //else if(this._form.controls[field].touched == true && this._form.controls[field].valid == true) {
-        //    isValid = true;
-        //}
-
+        else if(this._form.controls[field].touched == true && this._form.controls[field].valid == true) {
+            isValid = true;
+        }
+        console.log(field);
+        console.log(isValid);
         return isValid;
     }
 
@@ -155,7 +158,37 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
                     );
             } else {
                 this._mode = 'create';
+                this._clazzDataService.getAllSchools()
+                    .subscribe(
+                        result => {
+                            let schools = result;
+                            this._schools = schools;
+                        },
+                        error => {
+                            // unauthorized access
+                            if(error.status == 401 || error.status == 403) {
+                                this._staffService.unauthorizedAccess(error);
+                            } else {
+                                this._errorMessage = error.data.message;
+                            }
+                        }
+                    );
 
+                this._clazzDataService.getAllTeachers()
+                    .subscribe(
+                        result => {
+                            let teachers = result;
+                            this._teachers = teachers;
+                        },
+                        error => {
+                            // unauthorized access
+                            if(error.status == 401 || error.status == 403) {
+                                this._staffService.unauthorizedAccess(error);
+                            } else {
+                                this._errorMessage = error.data.message;
+                            }
+                        }
+                    );
             }
         });
     }

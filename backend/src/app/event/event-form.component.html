@@ -63,7 +63,7 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="school_id">School <span class="required">*</span></label>
+                                <label class="col-sm-12" for="school_id">Trường<span class="required">*</span></label>
                                 <div class="col-sm-6">
                                     <select class="form-control" id="school_id" [formControl]="_form.controls['school_id']" [ngClass]="{'form-control-danger': !_isValid('school_id')}" [(ngModel)]="_event.school_id">
                                         <option *ngFor="let school of _schools" [value]="school.value" [selected]="">{{school.label}}</option>
@@ -81,7 +81,7 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="teacher_id">Teacher <span class="required">*</span></label>
+                                <label class="col-sm-12" for="teacher_id">Giáo viên <span class="required">*</span></label>
                                 <div class="col-sm-6">
                                     <select class="form-control" id="teacher_id" [formControl]="_form.controls['teacher_id']" [ngClass]="{'form-control-danger': !_isValid('teacher_id')}" [(ngModel)]="_event.teacher_id">
                                         <option *ngFor="let teacher of _teachers" [value]="teacher.value" [selected]="">{{teacher.label}}</option>
@@ -98,7 +98,7 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="class_id">Class <span class="required">*</span></label>
+                                <label class="col-sm-12" for="class_id">Lớp học <span class="required">*</span></label>
                                 <div class="col-sm-6">
                                     <select class="form-control" id="class_id" [formControl]="_form.controls['class_id']" [ngClass]="{'form-control-danger': !_isValid('class_id')}" [(ngModel)]="_event.class_id">
                                         <option *ngFor="let clazz of _clazzes" [value]="clazz.value" [selected]="">{{clazz.label}}</option>
@@ -115,7 +115,7 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="status">Status <span class="required">*</span></label>
+                                <label class="col-sm-12" for="status">Trạng thái  <span class="required">*</span></label>
                                 <div class="col-sm-6">
                                     <select class="form-control" id="status" [formControl]="_form.controls['status']" [ngClass]="{'form-control-danger': !_isValid('status')}" [(ngModel)]="_event.status">
                                         <option *ngFor="let statusType of _statusTypes" [value]="statusType.value" [selected]="">{{statusType.label}}</option>
@@ -133,11 +133,11 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Save</button>
+                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Lưu</button>
                                 <div *ngIf="_submitted" class="spinner"></div>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a [routerLink]="['/event']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Back to list</a>
+                                <a [routerLink]="['/event']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
                             </div>
                             <div *ngIf="_errorMessage" class="col-xs-12 error-block mt-h">
                                 <div class="alert alert-danger">{{_errorMessage}}</div>

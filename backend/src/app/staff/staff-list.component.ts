@@ -51,14 +51,14 @@ export class StaffListComponent implements OnInit{
         this._errorMessage = '';
 
         swal({
-            title: 'Are you sure?',
-            text: "Once delete, you won't be able to revert this!",
+            title: 'Bạn có chắc chắn?',
+            text: "Sau khi xóa bạn không thể lấy lại!",
             type: 'question',
             showLoaderOnConfirm: true,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
+            confirmButtonText: 'Chắc, xóa nó!',cancelButtonText: 'Hủy bỏ!',
             preConfirm: function () {
                 return new Promise(function (resolve, reject) {
                     parent._staffDataService.deleteStaffById(staff.id)

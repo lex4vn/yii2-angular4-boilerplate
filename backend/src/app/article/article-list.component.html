@@ -21,8 +21,8 @@
                             <tr>
                                 <th class="text-xs-center">ID</th>
                                 <th>title</th>
-                                <th width="15%" class="text-xs-center">Status</th>
-                                <th width="20%" class="text-xs-center">Functions</th>
+                                <th width="15%" class="text-xs-center">Trạng thái</th>
+                                <th width="20%" class="text-xs-center">Chức năng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,11 +49,11 @@
                                     <div *ngIf="article.status != -1">
                                         <button class="btn btn-primary btn-sm" type="button"
                                                 (click)="viewArticle(article)">
-                                            <i class="fa fa-edit"></i> Edit
+                                            <i class="fa fa-edit"></i> Sửa
                                         </button>
                                         <button class="btn btn-danger btn-sm" type="button"
                                                 (click)="confirmDeleteArticle(article)">
-                                            <i class="fa fa-remove"></i> Remove
+                                            <i class="fa fa-remove"></i> Xóa
                                         </button>
                                     </div>
                                 </td>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-primary btn-sm" [routerLink]="['/article', 'create']" routerLinkActive="active"><i
-                            class="fa fa-plus-square"></i> Create New Article</a>
+                            class="fa fa-plus-square"></i> Tạo mới Article</a>
                 </div>
             </div>
         </div>

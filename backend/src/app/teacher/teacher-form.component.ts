@@ -213,7 +213,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                 .subscribe(
                     result => {
                         if(result.success) {
-                            this._router.navigate(['/staff']);
+                            this._router.navigate(['/teacher']);
                         } else {
                             this._submitted = false;
                         }
@@ -240,7 +240,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                 .subscribe(
                     result => {
                         if(result.success) {
-                            this._router.navigate(['/staff']);
+                            this._router.navigate(['/teacher']);
                         } else {
                             this._submitted = false;
                         }

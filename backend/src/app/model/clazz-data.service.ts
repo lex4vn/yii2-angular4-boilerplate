@@ -135,11 +135,11 @@ export class ClazzDataService {
     public static getStatusTypes():Array<any>{
         return [
             {
-                label: 'Active',
+                label: 'Hoạt động',
                 value: 10
             },
             {
-                label: 'Disabled',
+                label: 'Tắt',
                 value: 0
             }
         ];
@@ -169,5 +169,37 @@ export class ClazzDataService {
                 value: 2
             }
         ];
+    }
+
+    public getAllSchools():Observable<Array<any>>{
+        let headers = this.getHeaders();
+
+        return this._authHttp.get(
+                this._globalService.apiHost+'/school/list',
+            {
+                headers: headers
+            }
+            )
+            .map(response => response.json())
+            .map((response) => {
+                return response.data;
+            })
+            .catch(this.handleError);
+    }
+
+    public getAllTeachers():Observable<Array<any>>{
+        let headers = this.getHeaders();
+
+        return this._authHttp.get(
+                this._globalService.apiHost+'/teacher/list',
+            {
+                headers: headers
+            }
+            )
+            .map(response => response.json())
+            .map((response) => {
+                return response.data;
+            })
+            .catch(this.handleError);
     }
 }

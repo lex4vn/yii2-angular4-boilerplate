@@ -8,28 +8,28 @@ const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Classes'
+            title: 'Lớp học'
         },
         children: [
             {
                 path: 'list',
                 component: ClazzListComponent,
                 data: {
-                    title: 'List',
+                    title: 'Danh sách',
                 }
             },
             {
                 path: 'create',
                 component: ClazzFormComponent,
                 data: {
-                    title: 'Create'
+                    title: 'Tạo mới'
                 }
             },
             {
                 path: ':id',
                 component: ClazzFormComponent,
                 data: {
-                    title: 'Update'
+                    title: 'Cập nhật'
                 }
             },
             {

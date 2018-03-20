@@ -21,7 +21,7 @@
                             <tr>
                                 <th>Setting Name</th>
                                 <th width="20%" class="text-xs-center">Value</th>
-                                <th width="20%" class="text-xs-center">Functions</th>
+                                <th width="20%" class="text-xs-center">Chức năng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,9 +35,9 @@
                                     {{setting.meta_value}}
                                 </td>
                                 <td class="text-xs-center">
-                                    <button class="btn btn-primary btn-sm" type="button" (click)="viewSetting(setting)"><i class="fa fa-edit"></i> Edit</button>
+                                    <button class="btn btn-primary btn-sm" type="button" (click)="viewSetting(setting)"><i class="fa fa-edit"></i> Sửa</button>
                                     <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteSetting(setting)">
-                                        <i class="fa fa-remove"></i> Remove
+                                        <i class="fa fa-remove"></i> Xóa
                                     </button>
                                 </td>
                             </tr>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/setting', 'global', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Setting</a>
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/setting', 'global', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới Setting</a>
                 </div>
             </div>
         </div>

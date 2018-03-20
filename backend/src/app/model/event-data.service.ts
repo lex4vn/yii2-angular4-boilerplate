@@ -133,11 +133,11 @@ export class EventDataService {
   public static getStatusTypes():Array<any>{
     return [
       {
-        label: 'Active',
+        label: 'Hoạt động',
         value: 1
       },
       {
-        label: 'Disabled',
+        label: 'Tắt',
         value: 0
       }
     ];

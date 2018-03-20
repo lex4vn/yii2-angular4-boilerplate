@@ -14,34 +14,34 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-header-create" *ngIf="_mode == 'create'">
-                            <strong>Create new class</strong>
+                            <strong>Tạo lớp học mới</strong>
                         </div>
                         <div class="update" *ngIf="_mode == 'update'">
-                            <strong>Class - {{_clazz.name}}</strong><br />
-                            <small>Update class</small>
+                            <strong>Lớp học - {{_clazz.name}}</strong><br />
+                            <small>Cập nhật lớp học</small>
                         </div>
                     </div>
                     <div class="card-block">
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('name')}">
-                                <label class="col-sm-12" for="name">Name <span class="required">*</span></label>
+                                <label class="col-sm-12" for="name">Tên lớp học <span class="required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter name" [formControl]="_form.controls['name']" [ngClass]="{'form-control-danger': !_isValid('name')}" [(ngModel)]="_clazz.name" />
+                                    <input type="text" class="form-control" id="name" placeholder="Nhập tên lớp" [formControl]="_form.controls['name']" [ngClass]="{'form-control-danger': !_isValid('name')}" [(ngModel)]="_clazz.name" />
                                 </div><div class="clearfix"></div>
-                                <div class="col-sm-12" *ngIf="!_formErrors.username.valid">
+                                <div class="col-sm-12" *ngIf="!_formErrors.name.valid">
                                     <span class="help-block help-block-error">{{_formErrors.name.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Name only allows alphanumeric, underscore</p>
+                                    <p class="help-text">* Tên lớp học chỉ cho phép chữ, số và dấu gạch dưới ví dụ Donal_2</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="description">Description</label>
+                                <label class="col-sm-12" for="description">Mô tả</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="description" placeholder="Enter the description" [formControl]="_form.controls['description']" [(ngModel)]="_clazz.description"/>
+                                    <input type="text" class="form-control" id="description" placeholder="Nhập mô tả về lớp học" [formControl]="_form.controls['description']" [(ngModel)]="_clazz.description"/>
                             </div>
                             </div>
 
@@ -49,17 +49,17 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="school_id">School <span class="required">*</span></label>
+                                <label class="col-sm-12" for="school_id">Trường<span class="required">*</span></label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="school_id" [formControl]="_form.controls['school_id']" [ngClass]="{'form-control-danger': !_isValid('school_id')}" [(ngModel)]="_staff.role">
-                                        <option *ngFor="let school of _schools" [value]="school.id" [selected]="">{{school.name}}</option>
+                                    <select class="form-control" id="school_id" [formControl]="_form.controls['school_id']" [ngClass]="{'form-control-danger': !_isValid('school_id')}" [(ngModel)]="_clazz.school_id">
+                                        <option *ngFor="let school of _schools" [value]="school.value" [selected]="">{{school.label}}</option>
                                     </select>
                                 </div><div class="clearfix"></div>
-                                <div class="col-sm-12" *ngIf="!_formErrors.role.valid">
+                                <div class="col-sm-12" *ngIf="!_formErrors.school_id.valid">
                                     <span class="help-block help-block-error">{{_formErrors.school_id.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* School.</p>
+                                    <p class="help-text">* Thuộc trường học nào.</p>
                                 </div>
                             </div>
                         </div>
@@ -67,25 +67,26 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="teacher_id">Teacher <span class="required">*</span></label>
+                                <label class="col-sm-12" for="teacher_id">Giáo viên <span class="required">*</span></label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="teacher_id" [formControl]="_form.controls['teacher_id']" [ngClass]="{'form-control-danger': !_isValid('teacher_id')}" [(ngModel)]="_staff.role">
+                                    <select class="form-control" id="teacher_id" [formControl]="_form.controls['teacher_id']" [ngClass]="{'form-control-danger': !_isValid('teacher_id')}" [(ngModel)]="_clazz.teacher_id">
                                         <option *ngFor="let teacher of _teachers" [value]="teacher.id" [selected]="">{{teacher.username}}</option>
                                     </select>
                                 </div><div class="clearfix"></div>
-                                <div class="col-sm-12" *ngIf="!_formErrors.role.valid">
+                                <div class="col-sm-12" *ngIf="!_formErrors.teacher_id.valid">
                                     <span class="help-block help-block-error">{{_formErrors.teacher_id.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Teacher of class.</p>
+                                    <p class="help-text">* Giáo viên của lớp học.</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="status">Status <span class="required">*</span></label>
+                                <label class="col-sm-12" for="status">Trạng thái  <span class="required">*</span></label>
                                 <div class="col-sm-6">
+
                                     <select class="form-control" id="status" [formControl]="_form.controls['status']" [ngClass]="{'form-control-danger': !_isValid('status')}" [(ngModel)]="_clazz.status">
                                         <option *ngFor="let statusType of _statusTypes" [value]="statusType.value" [selected]="">{{statusType.label}}</option>
                                     </select>
@@ -94,7 +95,7 @@
                                     <span class="help-block help-block-error">{{_formErrors.status.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Status field is configuring whether the user is active or disabled.</p>
+                                    <p class="help-text">* Trạng thái lớp học hoạt động hay không.</p>
                                 </div>
                             </div>
                         </div>
@@ -102,11 +103,11 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Save</button>
+                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Lưu</button>
                                 <div *ngIf="_submitted" class="spinner"></div>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a [routerLink]="['/user']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Back to list</a>
+                                <a [routerLink]="['/class']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
                             </div>
                             <div *ngIf="_errorMessage" class="col-xs-12 error-block mt-h">
                                 <div class="alert alert-danger">{{_errorMessage}}</div>

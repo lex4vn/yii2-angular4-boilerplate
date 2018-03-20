@@ -20,12 +20,12 @@
                             <thead>
                             <tr>
                                 <th class="text-xs-center">ID</th>
-                                <th>Username</th>
-                                <th>Email Address<br >(Confirmed At)</th>
-                                <th width="15%" class="text-xs-center">Last Login</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Địa chỉ email<br >(Thời điểm xác nhận)</th>
+                                <th width="15%" class="text-xs-center">Đăng nhập gần đây</th>
 
-                                <th width="15%" class="text-xs-center">Status<br />(Last Updated At)</th>
-                                <th width="20%" class="text-xs-center">Functions</th>
+                                <th width="15%" class="text-xs-center">Trạng thái<br />(Thời điểm cập nhật)</th>
+                                <th width="20%" class="text-xs-center">Chức năng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,7 +39,7 @@
                                 <td>
                                     <p *ngIf="user.confirmed_at == null">
                                         {{user.unconfirmed_email}}
-                                        <br /><span class="help-text text-danger">(Not Confirmed)</span>
+                                        <br /><span class="help-text text-danger">(Chưa xác nhận)</span>
                                     </p>
                                     <p *ngIf="user.confirmed_at != null">
                                         {{user.email}}
@@ -47,7 +47,7 @@
                                     </p>
                                 </td>
                                 <td class="text-xs-center">
-                                    <span *ngIf="user.last_login_ip == null" class="help-text">Never Logged In</span>
+                                    <span *ngIf="user.last_login_ip == null" class="help-text">Chưa đăng nhập lần nào</span>
                                     <p *ngIf="user.last_login_ip != null" class="help-text" title="{{user.last_login_at}}">{{user.last_login_ip}}<br />({{user.last_login_at | amTimeAgo}})</p>
                                 </td>
                                 <!--<td class="text-xs-center">-->
@@ -72,10 +72,10 @@
                                 <td class="text-xs-center">
                                     <div *ngIf="user.status != -1">
                                         <button class="btn btn-primary btn-sm" type="button" (click)="viewUser(user)">
-                                            <i class="fa fa-edit"></i> Edit
+                                            <i class="fa fa-edit"></i> Sửa
                                         </button>
                                         <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteUser(user)">
-                                            <i class="fa fa-remove"></i> Remove
+                                            <i class="fa fa-remove"></i> Xóa
                                         </button>
                                     </div>
                                 </td>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/user', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New User</a>
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/user', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới User</a>
                 </div>
             </div>
         </div>

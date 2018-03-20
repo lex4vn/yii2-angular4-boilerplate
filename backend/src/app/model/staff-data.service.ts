@@ -134,7 +134,7 @@ export class StaffDataService {
     public static getStatusTypes():Array<any>{
         return [
             {
-                label: 'Active',
+                label: 'Hoạt động',
                 value: 10
             },
             {
@@ -142,7 +142,7 @@ export class StaffDataService {
                 value: 1
             },
             {
-                label: 'Disabled',
+                label: 'Tắt',
                 value: 0
             }
         ];

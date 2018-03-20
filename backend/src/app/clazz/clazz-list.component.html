@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Classes
+                    <i class="fa fa-align-justify"></i> Lớp học
                 </div>
                 <div class="card-block">
                     <div class="table-responsive">
@@ -20,12 +20,12 @@
                             <thead>
                             <tr>
                                 <th class="text-xs-center">ID</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Teacher</th>
-                                <th>School</th>
-                                <th width="20%" class="text-xs-center">Status</th>
-                                <th width="20%" class="text-xs-center">Function</th>
+                                <th>Tên lớp</th>
+                                <th>Mô tả</th>
+                                <th>Giáo viên</th>
+                                <th>Trường</th>
+                                <th width="20%" class="text-xs-center">Trạng thái</th>
+                                <th width="20%" class="text-xs-center">Chức năng</th>
 
                             </tr>
                             </thead>
@@ -55,10 +55,10 @@
                                 <td class="text-xs-center">
                                     <div *ngIf="clazz.status != -1">
                                         <button class="btn btn-primary btn-sm" type="button" (click)="viewClazz(clazz)">
-                                            <i class="fa fa-edit"></i> Edit
+                                            <i class="fa fa-edit"></i> Sửa
                                         </button>
                                         <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteClazz(clazz)">
-                                            <i class="fa fa-remove"></i> Remove
+                                            <i class="fa fa-remove"></i> Xóa
                                         </button>
                                     </div>
                                 </td>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/class', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Class</a>
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/class', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới lớp học</a>
                 </div>
             </div>
         </div>

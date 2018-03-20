@@ -15,21 +15,21 @@ const routes: Routes = [
         path: 'list',
         component: EventListComponent,
         data: {
-          title: 'List',
+          title: 'Danh sách',
         }
       },
       {
         path: 'create',
         component: EventFormComponent,
         data: {
-          title: 'Create'
+          title: 'Tạo mới'
         }
       },
       {
         path: ':id',
         component: EventFormComponent,
         data: {
-          title: 'Update'
+          title: 'Cập nhật'
         }
       },
       {

@@ -18,7 +18,7 @@ export const routes: Routes = [
         path: '',
         component: FullLayoutComponent,
         data: {
-            title: 'Home'
+            title: 'Trang chủ'
         },
         canActivate: [AuthGuard],
         children: [

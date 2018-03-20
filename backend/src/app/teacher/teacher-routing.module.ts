@@ -8,28 +8,28 @@ const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Teachers'
+            title: 'Giáo viên'
         },
         children: [
             {
                 path: 'list',
                 component: TeacherListComponent,
                 data: {
-                    title: 'List',
+                    title: 'Danh sách',
                 }
             },
             {
                 path: 'create',
                 component: TeacherFormComponent,
                 data: {
-                    title: 'Create'
+                    title: 'Tạo mới'
                 }
             },
             {
                 path: ':id',
                 component: TeacherFormComponent,
                 data: {
-                    title: 'Update'
+                    title: 'Cập nhật'
                 }
             },
             {

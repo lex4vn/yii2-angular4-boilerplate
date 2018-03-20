@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Schedules
+                    <i class="fa fa-align-justify"></i> Thời khóa biểu
                 </div>
                 <div class="card-block">
                     <div class="table-responsive">
@@ -20,11 +20,11 @@
                             <thead>
                             <tr>
                                 <th class="text-xs-center">ID</th>
-                                <th>Title</th>
-                                <th>Description</th>
+                                <th>Tiêu đề</th>
+                                <th>Mô tả</th>
                                 <th width="15%" class="text-xs-center">Schedule Time</th>
 
-                                <th width="20%" class="text-xs-center">Function</th>
+                                <th width="20%" class="text-xs-center">Chức năng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,10 +44,10 @@
                                 <td class="text-xs-center">
                                     <div *ngIf="schedule.status != -1">
                                         <button class="btn btn-primary btn-sm" type="button" (click)="viewSchedule(schedule)">
-                                            <i class="fa fa-edit"></i> Edit
+                                            <i class="fa fa-edit"></i> Sửa
                                         </button>
                                         <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteSchedule(schedule)">
-                                            <i class="fa fa-remove"></i> Remove
+                                            <i class="fa fa-remove"></i> Xóa
                                         </button>
                                     </div>
                                 </td>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/schedule', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Create New Schedule</a>
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/schedule', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới Schedule</a>
                 </div>
             </div>
         </div>
