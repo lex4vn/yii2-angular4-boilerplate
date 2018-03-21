@@ -98,7 +98,8 @@ class NoteController extends ActiveController
     public function actionIndex()
     {
         return new ActiveDataProvider([
-            'query' => Note::find()->where([
+            'query' => Note::find()
+                ->where([
                 '!=', 'status', -1
             ])
 //                ->andWhere([
