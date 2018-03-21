@@ -43,8 +43,8 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
         this._form = _formBuilder.group({
             name: ['', Validators.compose([
                 Validators.required,
-                CustomValidators.rangeLength([3, 15]),
-                Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
+                //CustomValidators.rangeLength([3, 15]),
+                //Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
             ])],
             description: ['', Validators.compose([
                 //Validators.required,
@@ -206,7 +206,7 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
                 .subscribe(
                     result => {
                         if(result.success) {
-                            this._router.navigate(['/class']);
+                            this._router.navigate(['/clazz']);
                         } else {
                             this._submitted = false;
                         }
@@ -233,7 +233,7 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
                 .subscribe(
                     result => {
                         if(result.success) {
-                            this._router.navigate(['/class']);
+                            this._router.navigate(['/clazz']);
                         } else {
                             this._submitted = false;
                         }

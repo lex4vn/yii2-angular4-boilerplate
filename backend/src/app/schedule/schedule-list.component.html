@@ -22,7 +22,7 @@
                                 <th class="text-xs-center">ID</th>
                                 <th>Tiêu đề</th>
                                 <th>Mô tả</th>
-                                <th width="15%" class="text-xs-center">Schedule Time</th>
+                                <th width="15%" class="text-xs-center">Ngày</th>
 
                                 <th width="20%" class="text-xs-center">Chức năng</th>
                             </tr>
@@ -39,7 +39,7 @@
                                     {{schedule.description}}
                                 </td>
                                 <td class="text-xs-center">
-                                   ({{schedule.schedulet_time | amTimeAgo}})
+                                   ({{schedule.schedulet_time}})
                                 </td>
                                 <td class="text-xs-center">
                                     <div *ngIf="schedule.status != -1">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/schedule', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới Schedule</a>
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/schedule', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới Thời khóa biểu</a>
                 </div>
             </div>
         </div>

@@ -29,7 +29,9 @@ export class ScheduleFormComponent implements OnInit, OnDestroy{
 
     // Status Types
     private _statusTypes:any = {};
-
+    private _teachers:any = {};
+    private _schools:any = {};
+    private _clazzes:any = {};
     constructor(private _scheduleDataService:ScheduleDataService,
                 private _staffService:StaffService,
                 private _router:Router,
@@ -40,14 +42,22 @@ export class ScheduleFormComponent implements OnInit, OnDestroy{
         this._form = _formBuilder.group({
             title: ['', Validators.compose([
                 Validators.required,
-                CustomValidators.rangeLength([3, 15]),
-                Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
+                //CustomValidators.rangeLength([3, 15]),
+                //Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
             ])],
             description: ['', Validators.compose([
                 Validators.required,
             ])],
             schedule_time: ['', Validators.compose([])],
-
+            school_id: ['', Validators.compose([
+                Validators.required,
+            ])],
+            teacher_id: ['', Validators.compose([
+                Validators.required,
+            ])],
+            class_id: ['', Validators.compose([
+                Validators.required,
+            ])],
             status: ['', Validators.compose([
                 Validators.required,
                 // Custom validator for checking value against list of values
@@ -58,7 +68,9 @@ export class ScheduleFormComponent implements OnInit, OnDestroy{
         });
 
         this._statusTypes = ScheduleDataService.getStatusTypes();
-
+        this._schools = ScheduleDataService.getSchools();
+        this._teachers = ScheduleDataService.getTeachers();
+        this._clazzes = ScheduleDataService.getClazzes();
 
         this._form.valueChanges
             .subscribe(data => this.onValueChanged(data));
@@ -82,6 +94,9 @@ export class ScheduleFormComponent implements OnInit, OnDestroy{
             title: {valid: true, message: ''},
             description: {valid: true, message: ''},
             schedule_time: {valid: true, message: ''},
+            school_id: {valid: true, message: ''},
+            teacher_id: {valid: true, message: ''},
+            class_id: {valid: true, message: ''},
             status: {valid: true, message: ''},
         };
     }
@@ -154,7 +169,38 @@ export class ScheduleFormComponent implements OnInit, OnDestroy{
                     );
             } else {
                 this._mode = 'create';
+                this._scheduleDataService.getAllTeachers()
+                    .subscribe(
+                        result => {
+                            let teachers = result;
+                            this._teachers = teachers;
+                        },
+                        error => {
+                            // unauthorized access
+                            if(error.status == 401 || error.status == 403) {
+                                this._staffService.unauthorizedAccess(error);
+                            } else {
+                                this._errorMessage = error.data.message;
+                            }
+                        }
+                    );
 
+                this._scheduleDataService.getAllClazzes()
+                    .subscribe(
+                        result => {
+                            let clazzes = result;
+                            this._clazzes = clazzes;
+                            console.log(this._clazzes);
+                        },
+                        error => {
+                            // unauthorized access
+                            if(error.status == 401 || error.status == 403) {
+                                this._staffService.unauthorizedAccess(error);
+                            } else {
+                                this._errorMessage = error.data.message;
+                            }
+                        }
+                    );
             }
         });
     }

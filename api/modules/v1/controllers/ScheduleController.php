@@ -8,7 +8,9 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\auth\CompositeAuth;
+use yii\helpers\Url;
 use yii\rest\ActiveController;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 
 class ScheduleController extends ActiveController
@@ -128,6 +130,79 @@ class ScheduleController extends ActiveController
                 '!=', 'status', -1
             ])
         ]);
+    }
+
+    public function actionView($id)
+    {
+        $user = User::findIdentity(\Yii::$app->user->getId());
+        $schedule = Schedule::find()->where([
+            'id' => $id
+        ])->andWhere([
+            '!=', 'status', -1
+        ])
+//            ->andWhere([
+//            'teacher_id' => $user->id
+//        ])
+            ->one();
+
+
+        if ($schedule) {
+            return $schedule;
+        } else {
+            throw new NotFoundHttpException("Object not found: $id");
+        }
+    }
+
+    public function actionCreate()
+    {
+        $user = User::findIdentity(\Yii::$app->user->getId());
+        $model = new Schedule();
+        $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
+        $model->teacher_id = $user->id;
+
+        if ($model->validate() && $model->save()) {
+            $response = \Yii::$app->getResponse();
+            $response->setStatusCode(201);
+            $id = implode(',', array_values($model->getPrimaryKey(true)));
+            $response->getHeaders()->set('Location', Url::toRoute([$id], true));
+        } else {
+            // Validation error
+            throw new HttpException(422, json_encode($model->errors));
+        }
+
+        return $model;
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->actionView($id);
+
+        $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
+
+        if ($model->validate() && $model->save()) {
+            $response = \Yii::$app->getResponse();
+            $response->setStatusCode(200);
+        } else {
+            // Validation error
+            throw new HttpException(422, json_encode($model->errors));
+        }
+
+        return $model;
+    }
+
+    public function actionDelete($id)
+    {
+        $model = $this->actionView($id);
+
+        $model->status = Schedule::STATUS_DELETED;
+
+        if ($model->save(false) === false) {
+            throw new ServerErrorHttpException('Failed to delete the object for unknown reason.');
+        }
+
+        $response = \Yii::$app->getResponse();
+        $response->setStatusCode(204);
+        return "ok";
     }
 
     public function actionOptions($id = null)

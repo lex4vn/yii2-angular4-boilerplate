@@ -41,8 +41,8 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
         this._form = _formBuilder.group({
             title: ['', Validators.compose([
                 Validators.required,
-                CustomValidators.rangeLength([3, 15]),
-                Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
+                //CustomValidators.rangeLength([3, 15]),
+                //Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
             ])],
             teacher_id: ['', Validators.compose([
                 Validators.required,

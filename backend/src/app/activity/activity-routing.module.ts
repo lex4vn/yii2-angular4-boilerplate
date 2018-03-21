@@ -8,7 +8,7 @@ const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Activities'
+            title: 'Hoạt động'
         },
         children: [
             {

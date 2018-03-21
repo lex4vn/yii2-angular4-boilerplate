@@ -142,4 +142,73 @@ export class ScheduleDataService {
             }
         ];
     }
+
+    public static getTeachers():Array<any>{
+        return [
+            {
+                label: 'Cô Trang',
+                value: 1
+            },
+            {
+                label: 'Cô Ly',
+                value: 2
+            }
+        ];
+    }
+
+    public static getSchools():Array<any>{
+        return [
+            {
+                label: 'Kid smart',
+                value: 1
+            },
+            {
+                label: 'FPT',
+                value: 2
+            }
+        ];
+    }
+    public static getClazzes():Array<any>{
+        return [
+            {
+                label: 'Donal1',
+                value: 1
+            },
+            {
+                label: 'Donal2',
+                value: 2
+            }
+        ];
+    }
+    public getAllTeachers():Observable<Array<any>>{
+        let headers = this.getHeaders();
+
+        return this._authHttp.get(
+                this._globalService.apiHost+'/teacher/list',
+            {
+                headers: headers
+            }
+            )
+            .map(response => response.json())
+            .map((response) => {
+                return response.data;
+            })
+            .catch(this.handleError);
+    }
+
+    public getAllClazzes():Observable<Array<any>>{
+        let headers = this.getHeaders();
+
+        return this._authHttp.get(
+                this._globalService.apiHost+'/clazz/list',
+            {
+                headers: headers
+            }
+            )
+            .map(response => response.json())
+            .map((response) => {
+                return response.data;
+            })
+            .catch(this.handleError);
+    }
 }

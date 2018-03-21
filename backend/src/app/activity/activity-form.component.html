@@ -14,25 +14,25 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-header-create" *ngIf="_mode == 'create'">
-                            <strong>Create new activity</strong>
+                            <strong>Tạo hoạt động mới</strong>
                         </div>
                         <div class="update" *ngIf="_mode == 'update'">
-                            <strong>Schedule - {{_activity.title}}</strong><br />
-                            <small>Update activity</small>
+                            <strong>Hoạt động - {{_activity.title}}</strong><br />
+                            <small>Cập nhât</small>
                         </div>
                     </div>
                     <div class="card-block">
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('title')}">
-                                <label class="col-sm-12" for="title">Title <span class="required">*</span></label>
+                                <label class="col-sm-12" for="title">Tiêu đề <span class="required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="title" placeholder="Enter title" [formControl]="_form.controls['title']" [ngClass]="{'form-control-danger': !_isValid('title')}" [(ngModel)]="_activity.title" />
+                                    <input type="text" class="form-control" id="title" placeholder="Nhập tiêu đề" [formControl]="_form.controls['title']" [ngClass]="{'form-control-danger': !_isValid('title')}" [(ngModel)]="_activity.title" />
                                 </div><div class="clearfix"></div>
                                 <div class="col-sm-12" *ngIf="!_formErrors.title.valid">
                                     <span class="help-block help-block-error">{{_formErrors.title.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Title only allows alphanumeric, underscore and dashboard between 3 and 15 characters.</p>
+                                    <p class="help-text">* Tiêu đề cho hoạt động.</p>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                     <span class="help-block help-block-error">{{_formErrors.teacher_id.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Teacher of class.</p>
+                                    <p class="help-text">* Giáo viên của lớp.</p>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                     <span class="help-block help-block-error">{{_formErrors.class_id.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Class.</p>
+                                    <p class="help-text">* Lớp học </p>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('created_at')}">
-                                <label class="col-sm-12" for="created_at">Thời điểm xác nhận (Y-M-D H:M)</label>
+                                <label class="col-sm-12" for="created_at">Ngày hoạt động (Y-M-D H:M)</label>
                                 <div class="col-sm-6">
                                     <timepicker id="created_at" [placeholderText]="'Nhấp để chọn ngày và giờ tạo'" [dateTime]="_activity.created_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('created_at', $event)"></timepicker>
                                 </div><div class="clearfix"></div>
@@ -83,7 +83,7 @@
                                     <span class="help-block help-block-error">{{_formErrors.created_at.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Confirmed at field indicates the activity has been confirmed. If empty, then activity cannot log in to the system as the account is not confirmed. The value must be valid format - Y/M/D H:M:S. i.e. 2017-01-01 12:00:00</p>
+                                    <p class="help-text">* Thời gian diễn ra hoạt động</p>
                                 </div>
                             </div>
 
@@ -102,7 +102,7 @@
                                     <span class="help-block help-block-error">{{_formErrors.status.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Status field is configuring whether the activity is active or disabled.</p>
+                                    <p class="help-text">* Trạng thái của hoạt động.</p>
                                 </div>
                             </div>
                         </div>

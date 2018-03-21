@@ -82,17 +82,27 @@ class ClazzController extends ActiveController
         // setup access
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index', 'view', 'create', 'update', 'delete'], //only be applied to
+            'only' => ['index','list','view', 'create', 'update', 'delete'], //only be applied to
             'rules' => [
                 [
                     'allow' => true,
-                    'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                    'actions' => ['index','list', 'view', 'create', 'update', 'delete'],
                     'roles' => ['admin', 'manageUsers'],
                 ]
             ],
         ];
 
         return $behaviors;
+    }
+
+    public function actionList()
+    {
+        //$user = User::findIdentity(\Yii::$app->user->getId());
+        return new ActiveDataProvider([
+            'query' => SchoolClass::find()->where([
+                '!=', 'status', -1
+            ])
+        ]);
     }
 
     public function actionIndex()

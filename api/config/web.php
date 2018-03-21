@@ -134,6 +134,8 @@ $config = [
                     ],
                     'extraPatterns' => [
                         'OPTIONS {id}' => 'options',
+                        'GET list' => 'list',
+                        'OPTIONS list' => 'options',
                     ]
                 ],
                 [
@@ -165,8 +167,10 @@ $config = [
                     'controller' => 'v1/schedule',
                     'pluralize' => false,
                     'tokens' => [
+                        '{id}' => '<id:\d+>',
                     ],
                     'extraPatterns' => [
+                        'OPTIONS {id}' => 'options',
                         'GET index' => 'index',
                         'GET schedules' => 'schedules',
                         'OPTIONS schedules' => 'options',
