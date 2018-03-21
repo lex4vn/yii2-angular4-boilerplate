@@ -206,7 +206,7 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
                 .subscribe(
                     result => {
                         if(result.success) {
-                            this._router.navigate(['/clazz']);
+                            this._router.navigate(['/class']);
                         } else {
                             this._submitted = false;
                         }
@@ -233,7 +233,7 @@ export class ClazzFormComponent implements OnInit, OnDestroy{
                 .subscribe(
                     result => {
                         if(result.success) {
-                            this._router.navigate(['/clazz']);
+                            this._router.navigate(['/class']);
                         } else {
                             this._submitted = false;
                         }
