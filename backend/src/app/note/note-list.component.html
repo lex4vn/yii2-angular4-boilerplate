@@ -12,7 +12,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Notes
+          <i class="fa fa-align-justify"></i> Nhận xét
         </div>
         <div class="card-block">
           <div class="table-responsive">
@@ -20,10 +20,10 @@
               <thead>
               <tr>
                 <th class="text-xs-center">ID</th>
-                <th>Note</th>
-                <th>Schedule</th>
-                <th>Kid</th>
-                <th width="15%" class="text-xs-center">Created at</th>
+                <th>Nhận xét</th>
+                <th>Thời khóa biểu</th>
+                <th>Học sinh</th>
+                <th width="15%" class="text-xs-center">Ngày tạo</th>
                 <th width="20%" class="text-xs-center">Chức năng</th>
               </tr>
               </thead>
@@ -60,7 +60,8 @@
           </div>
         </div>
         <div class="card-footer">
-          <a class="btn btn-primary btn-sm" [routerLink]="['/note', 'create']" routerLinkActive="active"><i class="fa fa-plus-square"></i> Tạo mới Note</a>
+          <a class="btn btn-primary btn-sm" [routerLink]="['/note', 'create']" routerLinkActive="active">
+            <i class="fa fa-plus-square"></i> Tạo nhận xét</a>
         </div>
       </div>
     </div>

@@ -179,4 +179,36 @@ export class NoteDataService {
             }
         ];
     }
+
+    public getAllTeachers():Observable<Array<any>>{
+        let headers = this.getHeaders();
+
+        return this._authHttp.get(
+                this._globalService.apiHost+'/teacher/list',
+            {
+                headers: headers
+            }
+            )
+            .map(response => response.json())
+            .map((response) => {
+                return response.data;
+            })
+            .catch(this.handleError);
+    }
+
+    public getAllSchedules():Observable<Array<any>>{
+        let headers = this.getHeaders();
+
+        return this._authHttp.get(
+                this._globalService.apiHost+'/schedule/schedules',
+            {
+                headers: headers
+            }
+            )
+            .map(response => response.json())
+            .map((response) => {
+                return response.data;
+            })
+            .catch(this.handleError);
+    }
 }

@@ -44,7 +44,7 @@ export class NoteFormComponent implements OnInit, OnDestroy {
             note: ['', Validators.compose([
                 Validators.required,
                 //CustomValidators.rangeLength([3, 15]),
-                Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
+                //Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
             ])],
             teacher_id: ['', Validators.compose([
                 Validators.required,
@@ -143,6 +143,37 @@ export class NoteFormComponent implements OnInit, OnDestroy {
         this._resetFormErrors();
         this._resetNote();
 
+        this._noteDataService.getAllTeachers()
+            .subscribe(
+                result => {
+                    let teachers = result;
+                    this._teachers = teachers;
+                },
+                error => {
+                    // unauthorized access
+                    if(error.status == 401 || error.status == 403) {
+                        this._staffService.unauthorizedAccess(error);
+                    } else {
+                        this._errorMessage = error.data.message;
+                    }
+                }
+            );
+
+        this._noteDataService.getAllSchedules()
+            .subscribe(
+                result => {
+                    let schedules = result;
+                    this._schedules = schedules;
+                },
+                error => {
+                    // unauthorized access
+                    if(error.status == 401 || error.status == 403) {
+                        this._staffService.unauthorizedAccess(error);
+                    } else {
+                        this._errorMessage = error.data.message;
+                    }
+                }
+            );
 
         // _route is activated route service. this._route.params is observable.
         // subscribe is method that takes function to retrieve parameters when it is changed.
