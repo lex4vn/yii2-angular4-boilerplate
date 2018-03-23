@@ -127,7 +127,7 @@ export class SettingDataService {
         return this._authHttp.get(
             this._globalService.apiHost+'/setting/public',
             {
-                // headers: headers
+                 headers: headers
             }
         )
             .map(response => response.json())
@@ -165,6 +165,7 @@ export class SettingDataService {
             };
         }
         else {
+            console.log(error);
             errorMessage = error.json();
         }
         return Observable.throw(errorMessage);

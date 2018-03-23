@@ -39,23 +39,6 @@
 
             <div class="form-group-wrapper">
               <div class="form-group row">
-                <label class="col-sm-12" for="teacher_id">Giáo viên <span class="required">*</span></label>
-                <div class="col-sm-6">
-                  <select class="form-control" id="teacher_id" [formControl]="_form.controls['teacher_id']" [ngClass]="{'form-control-danger': !_isValid('teacher_id')}" [(ngModel)]="_note.teacher_id">
-                    <option *ngFor="let teacher of _teachers" [value]="teacher.id" [selected]="">{{teacher.username}}</option>
-                  </select>
-                </div><div class="clearfix"></div>
-                <div class="col-sm-12" *ngIf="!_formErrors.teacher_id.valid">
-                  <span class="help-block help-block-error">{{_formErrors.teacher_id.message}}</span>
-                </div>
-                <div class="col-sm-12">
-                  <p class="help-text">* Giáo viên của lớp.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group-wrapper">
-              <div class="form-group row">
                 <label class="col-sm-12" for="schedule_id">Lịch <span class="required">*</span></label>
                 <div class="col-sm-6">
                   <select class="form-control" id="schedule_id" [formControl]="_form.controls['schedule_id']" [ngClass]="{'form-control-danger': !_isValid('schedule_id')}" [(ngModel)]="_note.schedule_id">

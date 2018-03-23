@@ -1,6 +1,7 @@
 export class Teacher{
     id:number;
     username:string;
+    full_name:string;
     email:string;
     password:string;
     role:number;

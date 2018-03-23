@@ -48,6 +48,12 @@ export class ParentFormComponent implements OnInit, OnDestroy {
                 Validators.required,
                 CustomValidators.email,
             ])],
+            full_name: ['', Validators.compose([
+                Validators.required,
+            ])],
+            kid_name: ['', Validators.compose([
+                Validators.required,
+            ])],
             password: ['', Validators.compose([
                 Validators.minLength(6)
             ])],
@@ -58,7 +64,9 @@ export class ParentFormComponent implements OnInit, OnDestroy {
                 // Custom validator for checking value against list of values
                 ContainsValidators.contains('value', ParentDataService.getStatusTypes())
             ])],
-            avatar: null
+            avatar: null,
+            kid_avatar: null,
+            //class_id: null
         }, {
             validator: validateDateTime(['confirmed_at', 'blocked_at'])
         });
@@ -94,6 +102,9 @@ export class ParentFormComponent implements OnInit, OnDestroy {
             status: {valid: true, message: ''},
             kid_id: {valid: true, message: ''},
             avatar: {valid: true, message: ''},
+            full_name: {valid: true, message: ''},
+            kid_name: {valid: true, message: ''},
+            kid_avatar: {valid: true, message: ''},
         };
     }
 
@@ -108,7 +119,9 @@ export class ParentFormComponent implements OnInit, OnDestroy {
         else if (this._form.controls[field].touched == true && this._form.controls[field].valid == true) {
             isValid = true;
         }
-
+        if(!isValid){
+            console.log(field);
+        }
         return isValid;
     }
 
@@ -137,6 +150,9 @@ export class ParentFormComponent implements OnInit, OnDestroy {
         this._parent.status = 10;
         this._parent.kid_id = 0;
         this._parent.avatar = null;
+        this._parent.full_name = null;
+        this._parent.kid_name = null;
+        this._parent.kid_avatar = null;
     }
 
     public ngOnInit() {
@@ -184,6 +200,7 @@ export class ParentFormComponent implements OnInit, OnDestroy {
         const formModel = this._form.value;
         if (this._mode == 'create') {
             this._parent.avatar = this._form.get('avatar').value;
+            this._parent.kid_avatar = this._form.get('kid_avatar').value;
             this._parentDataService.addParent(this._parent)
                 .subscribe(
                     result => {
@@ -211,6 +228,8 @@ export class ParentFormComponent implements OnInit, OnDestroy {
                     }
                 );
         } else if (this._mode == 'update') {
+            this._parent.avatar = this._form.get('avatar').value;
+            this._parent.kid_avatar = this._form.get('kid_avatar').value;
             this._parentDataService.updateParentById(this._parent)
                 .subscribe(
                     result => {
@@ -251,6 +270,22 @@ export class ParentFormComponent implements OnInit, OnDestroy {
         } else if (type == 'blocked_at') {
             this._parent.blocked_at = formattedDateTime;
         }
+    }
+
+    public onFileChangeKidAvatar(event) {
+        let reader = new FileReader();
+        if(event.target.files && event.target.files.length > 0) {
+            let file = event.target.files[0];
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                this._form.get('kid_avatar').setValue(reader.result.split(',')[1])
+            };
+        }
+    }
+
+    public clearFileKidAvatar() {
+        this._form.get('kid_avatar').setValue(null);
+        this.fileInput.nativeElement.value = '';
     }
 
     public onFileChange(event) {

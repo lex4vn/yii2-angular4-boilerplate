@@ -46,6 +46,9 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                 CustomValidators.rangeLength([3, 15]),
                 Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
             ])],
+            full_name: ['', Validators.compose([
+                Validators.required,
+            ])],
             email: ['', Validators.compose([
                 Validators.required,
                 CustomValidators.email,
@@ -55,14 +58,6 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
             ])],
             confirmed_at: ['', Validators.compose([])],
             blocked_at: ['', Validators.compose([])],
-            role: ['', Validators.compose([
-                Validators.required,
-                ContainsValidators.contains('value', TeacherDataService.getRoleTypes())
-            ])],
-            // permissions: _formBuilder.array([]),
-            permissions: ['', Validators.compose([
-
-            ])],
             status: ['', Validators.compose([
                 Validators.required,
                 // Custom validator for checking value against list of values
@@ -73,8 +68,6 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
         });
 
         this._statusTypes = TeacherDataService.getStatusTypes();
-        this._roleTypes = TeacherDataService.getRoleTypes();
-
         this._form.valueChanges
             .subscribe(data => this.onValueChanged(data));
 
@@ -95,14 +88,12 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
     private _resetFormErrors():void{
         this._formErrors = {
             username: {valid: true, message: ''},
+            full_name: {valid: true, message: ''},
             email: {valid: true, message: ''},
             password: {valid: true, message: ''},
             confirmed_at: {valid: true, message: ''},
             blocked_at: {valid: true, message: ''},
-            role: {valid: true, message: ''},
-            permissions: {valid: true, message: ''},
             status: {valid: true, message: ''},
-
         };
     }
 
@@ -141,9 +132,8 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
         this._teacher.password = '';
         this._teacher.confirmed_at = '';
         this._teacher.blocked_at = '';
-        this._teacher.role = 50;
-        this._teacher.permissions = [];
         this._teacher.status = 10;
+        this._teacher.full_name = null;
     }
 
     public ngOnInit() {
@@ -159,8 +149,8 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                 this._errorMessage = "";
                 this._teacherDataService.getTeacherById(this._id)
                     .subscribe(
-                        staff => {
-                            this._teacher = staff;
+                        teacher => {
+                            this._teacher = teacher;
                             this._mode = 'update';
                         },
                         error => {
@@ -236,6 +226,7 @@ export class TeacherFormComponent implements OnInit, OnDestroy{
                     }
                 );
         } else if(this._mode == 'update') {
+
             this._teacherDataService.updateTeacherById(this._teacher)
                 .subscribe(
                     result => {

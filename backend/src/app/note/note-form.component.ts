@@ -30,7 +30,6 @@ export class NoteFormComponent implements OnInit, OnDestroy {
     // Status Types
     private _statusTypes:any = {};
     private _kids:any = {};
-    private _teachers:any = {};
     private _schedules:any = {};
 
     constructor(private _noteDataService:NoteDataService,
@@ -45,9 +44,6 @@ export class NoteFormComponent implements OnInit, OnDestroy {
                 Validators.required,
                 //CustomValidators.rangeLength([3, 15]),
                 //Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
-            ])],
-            teacher_id: ['', Validators.compose([
-                Validators.required,
             ])],
             schedule_id: ['', Validators.compose([
                 Validators.required,
@@ -68,7 +64,6 @@ export class NoteFormComponent implements OnInit, OnDestroy {
         this._statusTypes = NoteDataService.getStatusTypes();
 
         this._kids = NoteDataService.getKids();
-        this._teachers = NoteDataService.getTeachers();
         this._schedules = NoteDataService.getSchedules();
 
         this._form.valueChanges
@@ -91,7 +86,6 @@ export class NoteFormComponent implements OnInit, OnDestroy {
     private _resetFormErrors():void {
         this._formErrors = {
             note: {valid: true, message: ''},
-            teacher_id: {valid: true, message: ''},
             schedule_id: {valid: true, message: ''},
             kid_id: {valid: true, message: ''},
             created_at: {valid: true, message: ''},
@@ -132,7 +126,6 @@ export class NoteFormComponent implements OnInit, OnDestroy {
     private _resetNote() {
         this._note = new Note();
         this._note.note = '';
-        this._note.teacher_id = 0;
         this._note.schedule_id = 0;
         this._note.kid_id = 0;
         this._note.created_at = '';
@@ -143,21 +136,7 @@ export class NoteFormComponent implements OnInit, OnDestroy {
         this._resetFormErrors();
         this._resetNote();
 
-        this._noteDataService.getAllTeachers()
-            .subscribe(
-                result => {
-                    let teachers = result;
-                    this._teachers = teachers;
-                },
-                error => {
-                    // unauthorized access
-                    if(error.status == 401 || error.status == 403) {
-                        this._staffService.unauthorizedAccess(error);
-                    } else {
-                        this._errorMessage = error.data.message;
-                    }
-                }
-            );
+
 
         this._noteDataService.getAllSchedules()
             .subscribe(

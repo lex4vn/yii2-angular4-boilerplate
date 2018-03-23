@@ -12,10 +12,12 @@ import {StaffService} from "../model/staff.service";
 export class ParentListComponent implements OnInit{
     private _parents:Parent[];
     private _errorMessage:string;
-
+    private _base_url : string = 'http://localhost/kidschool/api/web/';
     constructor(private _parentDataService:ParentDataService,
                 private _staffService:StaffService,
-                private _router:Router) {}
+                private _router:Router) {
+        this._base_url = this._parentDataService.getBaseUrl();
+    }
 
     ngOnInit() {
         this.getParents();

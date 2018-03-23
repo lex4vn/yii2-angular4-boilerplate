@@ -8,7 +8,7 @@ const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Articles'
+            title: 'Tin tức'
         },
         children: [
             {

@@ -19,7 +19,12 @@ export class ParentDataService {
                 private _staffService:StaffService,
                 private _authHttp: AuthHttp){
     }
+    // POST /v1/parent
+    getBaseUrl():string{
+        let headers = this.getHeaders();
 
+        return this._globalService.baseUrl;
+    }
     // POST /v1/parent
     addParent(parent:Parent):Observable<any>{
         let headers = this.getHeaders();

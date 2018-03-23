@@ -36,6 +36,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('full_name')}">
+                                <label class="col-sm-12" for="username">Họ tên <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="full_name" placeholder="Nhập họ tên" [formControl]="_form.controls['full_name']" [ngClass]="{'form-control-danger': !_isValid('full_name')}" [(ngModel)]="_teacher.full_name" />
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.full_name.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.full_name.message}}</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('email')}">
                                 <label class="col-sm-12" for="email">Địa chỉ email <span class="required">*</span></label>
@@ -109,39 +122,6 @@
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="form-group-wrapper">
-                            <div class="form-group row">
-                                <label class="col-sm-12" for="role">Vai trò<span class="required">*</span></label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="role" [formControl]="_form.controls['role']" [ngClass]="{'form-control-danger': !_isValid('role')}" [(ngModel)]="_teacher.role">
-                                        <option *ngFor="let roleType of _roleTypes" [value]="roleType.value" [selected]="">{{roleType.label}}</option>
-                                    </select>
-                                </div><div class="clearfix"></div>
-                                <div class="col-sm-12" *ngIf="!_formErrors.role.valid">
-                                    <span class="help-block help-block-error">{{_formErrors.role.message}}</span>
-                                </div>
-                                <div class="col-sm-12">
-                                    <p class="help-text">* Vai trò của người dùng là gì.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Only if role is teacher -->
-                        <div class="form-group-wrapper" *ngIf="_teacher.role == 50">
-                            <div class="form-group row">
-                                <label class="col-sm-12">Quyền</label>
-                                <div class="col-sm-6">
-                                    <div class="card">
-                                        <div class="card-block">
-                                            <div class="checkbox" *ngFor="let permission of _teacher.permissions; let i = index">
-                                                <label for="permission_{{permission.name}}">
-                                                    <input type="checkbox" id="permission_{{permission.name}}" [formControl]="_form.controls['permissions']" name="permissions[]" [(value)]="_teacher.permissions[i].checked" [checked]="permission.checked" (change)="_teacher.permissions[i].checked = $event.target.checked"/> {{permission.description}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="form-group-wrapper">

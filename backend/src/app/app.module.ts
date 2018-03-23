@@ -18,17 +18,20 @@ import {SmartResizeDirective} from './shared/smart-resize.directive';
 import {AppRoutingModule} from './app.routing';
 
 // Layouts
+import {TeacherLayoutComponent} from './layouts/teacher-layout.component';
 import {FullLayoutComponent} from './layouts/full-layout.component';
 import {SimpleLayoutComponent} from './layouts/simple-layout.component';
 import {P404Component} from './pages/404.component';
 
 // Shared
 import {AuthGuard} from './model/auth.guard';
+import {RoleGuard} from './model/role.guard';
 import {SharedModule} from './shared/shared.module';
 
 // Model & Services
 import {GlobalService} from './model/global.service';
 import {StaffService} from './model/staff.service';
+import {TeacherService} from './model/teacher.service';
 import {StaffDataService} from './model/staff-data.service';
 import {TeacherDataService} from './model/teacher-data.service';
 import {ScheduleDataService} from './model/schedule-data.service';
@@ -53,6 +56,7 @@ import {ActivityDataService} from './model/activity-data.service';
     ],
     declarations: [
         AppComponent,
+        TeacherLayoutComponent,
         FullLayoutComponent,
         SimpleLayoutComponent,
         NAV_DROPDOWN_DIRECTIVES,
@@ -68,6 +72,8 @@ import {ActivityDataService} from './model/activity-data.service';
             useClass: HashLocationStrategy
         },
         AuthGuard,
+        RoleGuard,
+        TeacherService,
         StaffService,
         GlobalService,
         SettingDataService,

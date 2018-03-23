@@ -6,6 +6,7 @@ use app\models\LoginForm;
 use app\models\PasswordResetForm;
 use app\models\PasswordResetRequestForm;
 use app\models\PasswordResetTokenVerificationForm;
+use app\models\SchoolClass;
 use app\models\SignupConfirmForm;
 use app\models\SignupForm;
 use app\models\User;
@@ -106,6 +107,29 @@ class ParentController extends ActiveController
 
     public function actionIndex()
     {
+        $user = User::findIdentity(\Yii::$app->user->getId());
+        //return $user;
+        // Role Staff
+        if(50 == $user->role){
+            //Find class
+            $schoolClass = SchoolClass::find()->where(['teacher_id'=>$user->id])->one();
+            if($schoolClass){
+                    return new ActiveDataProvider([
+                        'query' => User::find()
+                            ->select('user.*,school_class.name as class_name')
+                            ->joinWith(['schoolClass'])
+                            ->where([
+                            '!=', 'user.status', -1
+                        ])->andWhere([
+                            'role' => User::ROLE_USER,
+                            'class_id' => $schoolClass->id,
+                        ])
+                    ]);
+            }else{
+                return null;
+            }
+        }
+
         return new ActiveDataProvider([
             'query' => User::find()->where([
                 '!=', 'status', -1
@@ -149,6 +173,23 @@ class ParentController extends ActiveController
         $success = file_put_contents($file, $data);
         $model->avatar =  $success ? $file : '';
 
+        $kid_img = $model->kid_avatar;
+        $kid_img = str_replace('data:image/png;base64,', '', $kid_img);
+        $kid_img = str_replace(' ', '+', $kid_img);
+        $kid_data = base64_decode($kid_img);
+        $kid_file = UPLOAD_DIR . uniqid() . '.png';
+        $kid_success = file_put_contents($kid_file, $kid_data);
+        $model->kid_avatar =  $kid_success ? $kid_file : '';
+
+        $user = User::findIdentity(\Yii::$app->user->getId());
+        //return $user;
+        // Role Staff
+        if(50 == $user->role){
+            $schoolClass = SchoolClass::find()->where(['teacher_id'=>$user->id])->one();
+            if($schoolClass) {
+                $model->class_id = $schoolClass->id;
+            }
+        }
         if ($model->validate() && $model->save()) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(201);
@@ -168,6 +209,26 @@ class ParentController extends ActiveController
 
         $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
 
+        // requires php5
+        define('UPLOAD_DIR', 'images/avatar/');
+        if($model->avatar) {
+            $img = $model->avatar;
+            $img = str_replace('data:image/png;base64,', '', $img);
+            $img = str_replace(' ', '+', $img);
+            $data = base64_decode($img);
+            $file = UPLOAD_DIR . uniqid() . '.png';
+            $success = file_put_contents($file, $data);
+            $model->avatar = $success ? $file : '';
+        }
+        if($model->kid_avatar) {
+            $kid_img = $model->kid_avatar;
+            $kid_img = str_replace('data:image/png;base64,', '', $kid_img);
+            $kid_img = str_replace(' ', '+', $kid_img);
+            $kid_data = base64_decode($kid_img);
+            $kid_file = UPLOAD_DIR . uniqid() . '.png';
+            $kid_success = file_put_contents($kid_file, $kid_data);
+            $model->kid_avatar = $kid_success ? $kid_file : '';
+        }
         if ($model->validate() && $model->save()) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(200);

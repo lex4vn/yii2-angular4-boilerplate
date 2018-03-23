@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, ElementRef, ViewChild, OnInit, OnDestroy} from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 import {CustomValidators} from 'ng2-validation';
 import {ContainsValidators} from "../shared/contains-validator.directive";
@@ -29,7 +29,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy{
 
     // Status Types
     private _statusTypes:any = {};
-
+    @ViewChild('fileInput') fileInput: ElementRef;
     constructor(private _articleDataService:ArticleDataService,
                 private _staffService:StaffService,
                 private _router:Router,
@@ -40,12 +40,11 @@ export class ArticleFormComponent implements OnInit, OnDestroy{
         this._form = _formBuilder.group({
             title: ['', Validators.compose([
                 Validators.required,
-                CustomValidators.rangeLength([3, 15]),
-                Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
+                //CustomValidators.rangeLength([3, 15]),
+                //Validators.pattern('^[A-Za-z0-9_-]{3,15}$'),
             ])],
-            body: ['', Validators.compose([
+            link: ['', Validators.compose([
                 Validators.required,
-                CustomValidators.email,
             ])],
             thumbnail: ['', Validators.compose([
             ])],
@@ -84,7 +83,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy{
     private _resetFormErrors():void{
         this._formErrors = {
             title: {valid: true, message: ''},
-            body: {valid: true, message: ''},
+            link: {valid: true, message: ''},
             thumbnail: {valid: true, message: ''},
             published_at: {valid: true, message: ''},
             created_by: {valid: true, message: ''},
@@ -124,7 +123,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy{
     private _resetArticle(){
         this._article = new Article();
         this._article.title = '';
-        this._article.body = '';
+        this._article.link = '';
         this._article.thumbnail = '';
         this._article.published_at = '';
         this._article.created_by = 0;
@@ -174,6 +173,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy{
     public onSubmit() {
         this._submitted = true;
         this._resetFormErrors();
+        this._article.thumbnail = this._form.get('thumbnail').value;
         if(this._mode == 'create') {
             this._articleDataService.addArticle(this._article)
                 .subscribe(
@@ -242,6 +242,22 @@ export class ArticleFormComponent implements OnInit, OnDestroy{
         } else if(type == 'created_at') {
             this._article.created_at = formattedDateTime;
         }
+    }
+
+    public onFileChange(event) {
+        let reader = new FileReader();
+        if(event.target.files && event.target.files.length > 0) {
+            let file = event.target.files[0];
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                this._form.get('thumbnail').setValue(reader.result.split(',')[1])
+            };
+        }
+    }
+
+    public clearFile() {
+        this._form.get('thumbnail').setValue(null);
+        this.fileInput.nativeElement.value = '';
     }
 }
 

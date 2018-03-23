@@ -13,6 +13,12 @@ export class Parent {
     updated_at:string;
     kid_id: number;
     avatar: string;
+    class_id: number;
+    class_name: string;
+    full_name: string;
+    kid_name: string;
+    kid_avatar: string;
+    phone: string;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);

@@ -12,10 +12,12 @@ import {StaffService} from "../model/staff.service";
 export class ArticleListComponent implements OnInit{
     private _articles:Article[];
     private _errorMessage:string;
-
+    private _base_url : string = '';
     constructor(private _articleDataService:ArticleDataService,
                 private _staffService:StaffService,
-                private _router:Router) {}
+                private _router:Router) {
+        this._base_url = this._articleDataService.getBaseUrl();
+    }
 
     ngOnInit() {
         this.getArticles();

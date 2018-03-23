@@ -24,6 +24,7 @@ use yii\web\Request as WebRequest;
  * @property integer $last_login_at
  * @property string $last_login_ip
  * @property integer $blocked_at
+ * @property integer $class_id
  * @property boolean $status
  * @property integer $role
  * @property integer $sex
@@ -33,6 +34,8 @@ use yii\web\Request as WebRequest;
  * @property string $unconfirmed_phone
  * @property string $confirmed_phone_at
  * @property string $full_name
+ * @property string $kid_name
+ * @property string $kid_avatar
  * @property string $address
  * @property string $avatar
  * @property string $avatar_height
@@ -61,6 +64,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     /** @var  array $permissions to store list of permissions */
     public $permissions;
+
+    public $class_name;
 
     /**
      * @inheritdoc
@@ -141,6 +146,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'created_at',
             'updated_at',
             'avatar',
+            'class_id',
+            'class_name',
+            'kid_name',
+            'kid_avatar',
         ];
 
 		// If role is staff and admin, then return permissions
@@ -197,6 +206,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 		    case self::ROLE_STAFF:
 			    $roleName = 'staff';
 			    break;
+            case self::ROLE_TEACHER:
+			    $roleName = 'teacher';
+			    break;
 		    case self::ROLE_ADMIN:
 			    $roleName = 'admin';
 			    break;
@@ -216,6 +228,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 			case self::ROLE_ADMIN:
 				$roleLabel = Yii::t('app', 'Administrator');
 				break;
+            case self::ROLE_TEACHER:
+                $roleLabel = Yii::t('app', 'Teacher');
+                break;
 		}
 		return $roleLabel;
 	}
@@ -248,7 +263,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
 			['permissions', 'validatePermissions'],
             [['access_token', 'permissions'], 'safe'],
-            ['avatar', 'string'],
+            [['avatar','kid_avatar','kid_name','full_name'], 'string'],
         ];
     }
 
@@ -856,6 +871,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 		$token['jti'] = $this->getJTI();    // JSON Token ID: A unique string, could be used to validate a token, but goes against not having a centralized issuer authority.
 		return [JWT::encode($token, $secret, static::getAlgo()), $token];
 	}
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchoolClass()
+    {
+        return $this->hasOne(SchoolClass::className(), ['id' => 'class_id']);
+    }
 
     public function getFullName(){
         if($this->full_name){

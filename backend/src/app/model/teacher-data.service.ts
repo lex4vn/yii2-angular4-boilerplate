@@ -43,7 +43,7 @@ export class TeacherDataService {
         let headers = this.getHeaders();
 
         return this._authHttp.delete(
-            this._globalService.apiHost+'/teacher/'+id,
+            this._globalService.apiHost+'/staff/'+id,
             {
                 headers: headers
             }
@@ -60,7 +60,7 @@ export class TeacherDataService {
         let headers = this.getHeaders();
 
         return this._authHttp.put(
-            this._globalService.apiHost+'/teacher/'+teacher.id,
+            this._globalService.apiHost+'/staff/'+teacher.id,
             JSON.stringify(teacher),
             {
                 headers: headers
@@ -101,7 +101,7 @@ export class TeacherDataService {
         let headers = this.getHeaders();
 
         return this._authHttp.get(
-            this._globalService.apiHost+'/teacher/'+id,
+            this._globalService.apiHost+'/staff/'+id,
             {
                 headers: headers
             }
@@ -138,7 +138,7 @@ export class TeacherDataService {
                 value: 10
             },
             {
-                label: 'Waiting Confirmation',
+                label: 'Đợi xác nhận',
                 value: 1
             },
             {

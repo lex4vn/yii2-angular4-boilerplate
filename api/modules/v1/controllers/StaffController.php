@@ -280,7 +280,8 @@
 
 	        $model->roles = [
 	            User::ROLE_ADMIN,
-	            User::ROLE_STAFF
+	            User::ROLE_STAFF,
+	            User::ROLE_TEACHER,
 	        ];
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
                 $user = $model->getUser();

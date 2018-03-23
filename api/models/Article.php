@@ -28,6 +28,8 @@ use yii\helpers\Url;
  * @property integer $updated_by
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $link
+ * @property string $thumbnail
  *
  * @property User $author
  * @property User $updater
@@ -43,12 +45,12 @@ class Article extends ActiveRecord
     /**
      * @var array
      */
-    public $attachments;
+    //public $attachments;
 
     /**
      * @var array
      */
-    public $thumbnail;
+    //public $thumbnail;
 
     /**
      * @inheritdoc
@@ -79,24 +81,24 @@ class Article extends ActiveRecord
                 'attribute' => 'title',
                 'immutable' => true
             ],
-            [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'attachments',
-                'multiple' => true,
-                'uploadRelation' => 'articleAttachments',
-                'pathAttribute' => 'path',
-                'baseUrlAttribute' => 'base_url',
-                'orderAttribute' => 'order',
-                'typeAttribute' => 'type',
-                'sizeAttribute' => 'size',
-                'nameAttribute' => 'name',
-            ],
-            [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'thumbnail',
-                'pathAttribute' => 'thumbnail_path',
-                'baseUrlAttribute' => 'thumbnail_base_url'
-            ]
+//            [
+//                'class' => UploadBehavior::className(),
+//                'attribute' => 'attachments',
+//                'multiple' => true,
+//                'uploadRelation' => 'articleAttachments',
+//                'pathAttribute' => 'path',
+//                'baseUrlAttribute' => 'base_url',
+//                'orderAttribute' => 'order',
+//                'typeAttribute' => 'type',
+//                'sizeAttribute' => 'size',
+//                'nameAttribute' => 'name',
+//            ],
+//            [
+//                'class' => UploadBehavior::className(),
+//                'attribute' => 'thumbnail',
+//                'pathAttribute' => 'thumbnail_path',
+//                'baseUrlAttribute' => 'thumbnail_base_url'
+//            ]
         ];
     }
 
@@ -106,20 +108,21 @@ class Article extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'body', 'category_id'], 'required'],
+            [['title'], 'required'],
             [['slug'], 'unique'],
-            [['summary'], 'string'],
             [['body'], 'string'],
             [['published_at'], 'default', 'value' => function () {
                 return date(DATE_ISO8601);
             }],
             [['published_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
-            [['category_id'], 'exist', 'targetClass' => ArticleCategory::className(), 'targetAttribute' => 'id'],
+            //[['category_id'], 'exist', 'targetClass' => ArticleCategory::className(), 'targetAttribute' => 'id'],
             [['status'], 'integer'],
-            [['slug', 'thumbnail_base_url', 'thumbnail_path'], 'string', 'max' => 1024],
+            //[['slug', 'thumbnail_base_url', 'thumbnail_path'], 'string', 'max' => 1024],
             [['title'], 'string', 'max' => 512],
             [['view'], 'integer'],
-            [['attachments', 'thumbnail'], 'safe']
+            [['attachments'], 'safe'],
+            [['link'], 'string'],
+            [['thumbnail'], 'string']
         ];
     }
 
@@ -132,7 +135,6 @@ class Article extends ActiveRecord
             'id' => 'ID',
             'slug' => 'Slug',
             'title' => 'Title',
-            'summary'   => 'Summary',
             'body' => 'Body',
             'view' => '',
             'thumbnail' => 'Thumbnail',

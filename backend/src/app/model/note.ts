@@ -4,8 +4,6 @@ export class Note {
     schedule_title:string;
     kid_id:number;
     kid_name:string;
-    teacher_id:number;
-    teacher_name:string;
     note:string;
     created_at:string;
     status:number;

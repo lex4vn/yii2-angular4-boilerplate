@@ -54,7 +54,24 @@ class SchoolClass extends \yii\db\ActiveRecord
             'description' => 'Description',
             'teacher_id' => 'Teacher ID',
             'school_id' => 'School ID',
+            'school_id' => 'School ID',
             'status' => 'Status',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacher()
+    {
+        return $this->hasOne(User::className(), ['id' => 'teacher_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchool()
+    {
+        return $this->hasOne(School::className(), ['id' => 'school_id']);
     }
 }

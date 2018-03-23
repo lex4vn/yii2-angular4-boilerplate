@@ -1,3 +1,4 @@
+
 # Yii2 REST API + Angular 4 Boilerplate
 
 [![Build Status](https://travis-ci.org/chrisleekr/yii2-angular4-boilerplate.svg?branch=master)](https://travis-ci.org/chrisleekr/yii2-angular4-boilerplate)
@@ -61,7 +62,9 @@ The project involves:
         - Admin or staff who has a permission 'manageUsers' can create/update/delete user information.
     * Setting Management
         - Admin or staff who has a permission 'manageSettings' can create/update/delete setting information.
-
+## Migration
+To migrate:
+    * $  ./yii migrate/create user_class
 ## Usage
 Currently, the project is not ready for production use. Following steps are suitable for configuring development environment.
 

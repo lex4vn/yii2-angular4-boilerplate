@@ -22,10 +22,13 @@
                                 <th class="text-xs-center">ID</th>
                                 <th>Ảnh đại diện</th>
                                 <th>Tên đăng nhập</th>
-                                <th>Địa chỉ email<br >(Thời điểm xác nhận)</th>
+                                <th>Phụ huynh</th>
+                                <th>Điện thoại</th>
+                                <th>Ảnh con</th>
                                 <th>Học sinh</th>
+                                <th>Lớp</th>
 
-                                <th width="15%" class="text-xs-center">Đăng nhập gần đây</th>
+                                <!--<th width="15%" class="text-xs-center">Đăng nhập gần đây</th>-->
 
                                 <th width="15%" class="text-xs-center">Trạng thái<br />(Thời điểm cập nhật)</th>
                                 <th width="20%" class="text-xs-center">Chức năng</th>
@@ -37,31 +40,32 @@
                                     {{parent.id}}
                                 </td>
                                 <td class="text-xs-center">
-                                    <img src="http://localhost/kidschool/api/web/{{parent.avatar}}" width="64px" />
+                                    <img src="{{_base_url + parent.avatar}}" width="64px" />
                                 </td>
                                 <td>
                                     {{parent.username}}
                                 </td>
-
                                 <td>
-                                    <p *ngIf="parent.confirmed_at == null">
-                                        {{parent.unconfirmed_email}}
-                                        <br /><span class="help-text text-danger">(Chưa xác nhận)</span>
-                                    </p>
-                                    <p *ngIf="parent.confirmed_at != null">
-                                        {{parent.email}}
-                                        <br /><span class="help-text" title="{{parent.confirmed_at}}">({{parent.confirmed_at | amTimeAgo}})</span>
-                                    </p>
+                                    {{parent.full_name}}
                                 </td>
-
                                 <td>
-                                    {{parent.kid_id}}
+                                      {{parent.phone}}
                                 </td>
-
                                 <td class="text-xs-center">
-                                    <span *ngIf="parent.last_login_ip == null" class="help-text">Chưa đăng nhập lần nào</span>
-                                    <p *ngIf="parent.last_login_ip != null" class="help-text" title="{{parent.last_login_at}}">{{parent.last_login_ip}}<br />({{parent.last_login_at | amTimeAgo}})</p>
+                                    <img src="{{_base_url + parent.kid_avatar}}" width="64px" />
                                 </td>
+                                <td>
+                                    {{parent.kid_name}}
+                                </td>
+                                <td>
+                                    {{parent.class_name}}
+                                </td>
+
+
+                                <!--<td class="text-xs-center">-->
+                                    <!--<span *ngIf="parent.last_login_ip == null" class="help-text">Chưa đăng nhập lần nào</span>-->
+                                    <!--<p *ngIf="parent.last_login_ip != null" class="help-text" title="{{parent.last_login_at}}">{{parent.last_login_ip}}<br />({{parent.last_login_at | amTimeAgo}})</p>-->
+                                <!--</td>-->
                                 <!--<td class="text-xs-center">-->
                                     <!--<span *ngIf="parent.blocked_at == null" class="help-text text-success">Not Blocked</span>-->
                                     <!--<span *ngIf="parent.blocked_at != null" class="text-danger">Blocked since {{parent.blocked_at}}</span>-->

@@ -11,6 +11,7 @@ use app\models\SignupConfirmForm;
 use app\models\SignupForm;
 use app\models\User;
 use app\models\UserEditForm;
+use app\modules\v1\resources\NoteResource;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -23,7 +24,7 @@ use yii\web\ServerErrorHttpException;
 
 class NoteController extends ActiveController
 {
-    public $modelClass = 'app\models\Note';
+    public $modelClass = '1';
 
     public function __construct($id, $module, $config = [])
     {
@@ -51,7 +52,7 @@ class NoteController extends ActiveController
         $behaviors['verbs'] = [
             'class' => \yii\filters\VerbFilter::className(),
             'actions' => [
-                'index' => ['get'],
+               // 'index' => ['get'],
                 'view' => ['get'],
                 'create' => ['post'],
                 'update' => ['put'],
@@ -82,12 +83,12 @@ class NoteController extends ActiveController
         // setup access
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index', 'view', 'create', 'update', 'delete'], //only be applied to
+            //'only' => ['index', 'view', 'create', 'update', 'delete'], //only be applied to
             'rules' => [
                 [
                     'allow' => true,
-                    'actions' => ['index', 'view', 'create', 'update', 'delete'],
-                    'roles' => ['admin', 'manageUsers'],
+                 //   'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                    //'roles' => ['admin', 'manageUsers'],
                 ],
             ],
         ];
@@ -98,9 +99,10 @@ class NoteController extends ActiveController
     public function actionIndex()
     {
         return new ActiveDataProvider([
-            'query' => Note::find()
+            'query' => NoteResource::find()->select('note.*,user.username as kid_name,schedule.title as schedule_title')
+                ->joinWith(['kid','schedule'])
                 ->where([
-                '!=', 'status', -1
+                '!=', 'note.status', -1
             ])
 //                ->andWhere([
 //                'role' => User::ROLE_USER

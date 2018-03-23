@@ -21,6 +21,7 @@
                             <tr>
                                 <th class="text-xs-center">ID</th>
                                 <th>Tên đăng nhập</th>
+                                <th>Họ tên</th>
                                 <th>Địa chỉ email<br >(Thời điểm xác nhận)</th>
                                 <th width="15%" class="text-xs-center">Đăng nhập gần đây</th>
 
@@ -35,6 +36,9 @@
                                 </td>
                                 <td>
                                     {{teacher.username}}
+                                </td>
+                                <td>
+                                    {{teacher.full_name}}
                                 </td>
                                 <td>
                                     <p *ngIf="teacher.confirmed_at == null">

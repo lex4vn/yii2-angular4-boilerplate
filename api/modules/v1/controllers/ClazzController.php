@@ -11,6 +11,7 @@ use app\models\SignupConfirmForm;
 use app\models\SignupForm;
 use app\models\User;
 use app\models\UserEditForm;
+use app\modules\v1\resources\ClazzResource;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -109,10 +110,11 @@ class ClazzController extends ActiveController
     {
         $user = User::findIdentity(\Yii::$app->user->getId());
         return new ActiveDataProvider([
-            'query' => SchoolClass::find()->where([
-                '!=', 'status', -1
-            ])->andWhere([
-                'teacher_id' => $user->id
+            'query' => ClazzResource::find()
+                ->select('school_class.*,user.username as teacher_name,school.name as school_name')
+                ->joinWith(['teacher','school'])
+                ->where([
+                '!=', 'school_class.status', -1
             ])
         ]);
     }

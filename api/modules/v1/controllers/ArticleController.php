@@ -7,7 +7,9 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\auth\CompositeAuth;
+use yii\helpers\Url;
 use yii\rest\ActiveController;
+use yii\web\HttpException;
 
 class ArticleController extends ActiveController
 {
@@ -125,7 +127,7 @@ class ArticleController extends ActiveController
                 'id' => $article->id,
                 'title' => $article->title,
                 'body' => $article->body,
-                'thumbnail' => $article->thumbnailUrl,
+                'thumbnail' => $article->thumbnail,
                 'created_at' => date('Y/m/d h:i:s', $article->created_at)
             );
         } else {
@@ -170,6 +172,17 @@ class ArticleController extends ActiveController
         $model = new Article();
         $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
 
+        // requires php5
+        define('UPLOAD_DIR', 'images/news/');
+
+        $img = $model->thumbnail;
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $data = base64_decode($img);
+        $file = UPLOAD_DIR . uniqid() . '.png';
+        $success = file_put_contents($file, $data);
+        $model->thumbnail =  $success ? $file : '';
+
         if ($model->validate() && $model->save()) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(201);
@@ -188,7 +201,17 @@ class ArticleController extends ActiveController
         $model = $this->actionNew($id);
 
         $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
-
+        // requires php5
+        define('UPLOAD_DIR', 'images/news/');
+        if($model->thumbnail) {
+            $img = $model->thumbnail;
+            $img = str_replace('data:image/png;base64,', '', $img);
+            $img = str_replace(' ', '+', $img);
+            $data = base64_decode($img);
+            $file = UPLOAD_DIR . uniqid() . '.png';
+            $success = file_put_contents($file, $data);
+            $model->thumbnail = $success ? $file : '';
+        }
         if ($model->validate() && $model->save()) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(200);
