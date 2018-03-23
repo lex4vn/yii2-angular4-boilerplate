@@ -14,97 +14,139 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-header-create" *ngIf="_mode == 'create'">
-                            <strong>Create new parent</strong>
+                            <strong>Tạo mới Phụ huynh </strong>
                         </div>
                         <div class="update" *ngIf="_mode == 'update'">
-                            <strong>Parent - {{_parent.username}}</strong><br />
-                            <small>Update parent</small>
+                            <strong>Phụ huynh - {{_parent.username}}</strong><br />
+                            <small>Cập nhật Phụ huynh</small>
                         </div>
                     </div>
                     <div class="card-block">
 
                         <div class="form-group-wrapper">
-                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('username')}">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('avatar')}">
 
-
-                                <label class="col-sm-12" for="avatar">Avatar <span class="required">*</span></label>
+                                <label class="col-sm-12" for="avatar">Ảnh đại diện <span class="required">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="file" class="form-control" id="avatar" (change)="onFileChange($event)" #fileInput>
-                                    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+                                    <button type="button" class="btn btn-sm btn-danger" (click)="clearFile()">Xóa ảnh</button>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="col-sm-12" *ngIf="!_formErrors.avatar.valid">
                                     <span class="help-block help-block-error">{{_formErrors.avatar.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Avatar</p>
+                                    <p class="help-text">* Ảnh đại diện kích thước dưới 2Mb, cho phép định dạng png hoặc jpg</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('username')}">
-                                <label class="col-sm-12" for="username">Username <span class="required">*</span></label>
+                                <label class="col-sm-12" for="username">Tên đăng nhập <span class="required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="username" placeholder="Enter username" [formControl]="_form.controls['username']" [ngClass]="{'form-control-danger': !_isValid('username')}" [(ngModel)]="_parent.username" />
+                                    <input type="text" class="form-control" id="username" placeholder="Nhập tên đăngn nhập" [formControl]="_form.controls['username']" [ngClass]="{'form-control-danger': !_isValid('username')}" [(ngModel)]="_parent.username" />
                                 </div><div class="clearfix"></div>
                                 <div class="col-sm-12" *ngIf="!_formErrors.username.valid">
                                     <span class="help-block help-block-error">{{_formErrors.username.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Username only allows alphanumeric, underscore and dashboard between 3 and 15 characters. i.e. abc123</p>
+                                    <p class="help-text">* Tên đăng nhập chỉ cho phép chữ cái, gạch dưới và có độ dài từ 3 đến 15 ký tự ví dụ anhtt_123</p>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('full_name')}">
+                                <label class="col-sm-12" for="username">Họ tên phụ huynh<span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="full_name" placeholder="Nhập họ tên" [formControl]="_form.controls['full_name']" [ngClass]="{'form-control-danger': !_isValid('full_name')}" [(ngModel)]="_parent.full_name" />
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.full_name.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.full_name.message}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('kid_name')}">
+                                <label class="col-sm-12" for="kid_name">Họ tên con<span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="kid_name" placeholder="Nhập họ tên con" [formControl]="_form.controls['kid_name']" [ngClass]="{'form-control-danger': !_isValid('kid_name')}" [(ngModel)]="_parent.kid_name" />
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.kid_name.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.kid_name.message}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('kid_avatar')}">
+
+                                <label class="col-sm-12" for="kid_avatar">Ảnh đại diện cho con <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control" id="kid_avatar" (change)="onFileChangeKidAvatar($event)" #fileInput>
+                                    <button type="button" class="btn btn-sm btn-danger" (click)="clearFileKidAvatar()">Xóa ảnh</button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.kid_avatar.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.kid_avatar.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Ảnh đại diện kích thước dưới 2Mb, cho phép định dạng png hoặc jpg</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('email')}">
-                                <label class="col-sm-12" for="email">Email Address <span class="required">*</span></label>
+                                <label class="col-sm-12" for="email">Địa chỉ email <span class="required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email address" [formControl]="_form.controls['email']" [ngClass]="{'form-control-danger': !_isValid('email')}" [(ngModel)]="_parent.email" />
+                                    <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email " [formControl]="_form.controls['email']" [ngClass]="{'form-control-danger': !_isValid('email')}" [(ngModel)]="_parent.email" />
                                 </div><div class="clearfix"></div>
                                 <div class="col-sm-12" *ngIf="!_formErrors.email.valid">
                                     <span class="help-block help-block-error">{{_formErrors.email.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Email must be valid email address. i.e. sample@username.com.</p>
+                                    <p class="help-text">* Email phải là địa chỉ email hợp lệ ví dụ anhtt@gmail.com.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('password')}">
-                                <label class="col-sm-12" for="password">Password</label>
+                                <label class="col-sm-12" for="password">Mật khẩu</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="password" placeholder="Enter the password" [formControl]="_form.controls['password']" [ngClass]="{'form-control-danger': !_isValid('password')}" [(ngModel)]="_parent.password"/>
+                                    <input type="text" class="form-control" id="password" placeholder="Nhập mật khẩu " [formControl]="_form.controls['password']" [ngClass]="{'form-control-danger': !_isValid('password')}" [(ngModel)]="_parent.password"/>
                                 </div><div class="clearfix"></div>
                                 <div class="col-sm-12" *ngIf="!_formErrors.password.valid">
                                     <span class="help-block help-block-error">{{_formErrors.password.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Password must be more than 6 characters.</p>
+                                    <p class="help-text">* Mật khẩu phải dài hơn 6 ký tự.</p>
                                 </div>
                             </div>
 
                         </div>
                         <div class="form-group-wrapper" *ngIf="_mode == 'update'">
                             <div class="form-group row">
-                                <label class="col-sm-12">Last Login</label>
+                                <label class="col-sm-12">Đăng nhập gần đây</label>
                                 <div class="col-sm-3">
-                                    <span *ngIf="_parent.last_login_ip == null" class="help-text">Never Logged In</span>
+                                    <span *ngIf="_parent.last_login_ip == null" class="help-text">Chưa đăng nhập lần nào</span>
                                     <p *ngIf="_parent.last_login_ip != null" class="help-text">{{_parent.last_login_ip}}<br />({{_parent.last_login_at}})</p>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group-wrapper">
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('confirmed_at')}">
-                                <label class="col-sm-12" for="confirmed_at">Confirmed At (Y-M-D H:M)</label>
+                                <label class="col-sm-12" for="confirmed_at">Thời điểm xác nhận (Y-M-D H:M)</label>
                                 <div class="col-sm-6">
-                                    <timepicker id="confirmed_at" [placeholderText]="'Click to set the date and time for confirming the user'" [dateTime]="_parent.confirmed_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('confirmed_at', $event)"></timepicker>
+                                    <timepicker id="confirmed_at" [placeholderText]="'Nhấp để chọn ngày và giờ xác nhận the user'" [dateTime]="_parent.confirmed_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('confirmed_at', $event)"></timepicker>
                                 </div><div class="clearfix"></div>
                                 <div class="col-sm-12" *ngIf="!_formErrors.confirmed_at.valid">
                                     <span class="help-block help-block-error">{{_formErrors.confirmed_at.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Confirmed at field indicates the user has been confirmed. If empty, then user cannot log in to the system as the account is not confirmed. The value must be valid format - Y/M/D H:M:S. i.e. 2017-01-01 12:00:00</p>
+                                    <p class="help-text">* Trường này cho biết phụ huynh đã được xác nhận. Nếu trống, sau đó phụ huynh không thể đăng nhập vào hệ thống vì tài khoản không được xác nhận. Giá trị phải có định dạng hợp lệ - Y/M/D H:M:S. i.e. 2018-01-01 12:00</p>
                                 </div>
                             </div>
 
@@ -113,13 +155,13 @@
                             <div class="form-group row" [ngClass]="{'has-danger': !_isValid('blocked_at')}">
                                 <label class="col-sm-12" for="blocked_at">Blocked At (Y-M-D H:M)</label>
                                 <div class="col-sm-6">
-                                    <timepicker id="blocked_at" [placeholderText]="'Click to set the date and time for blocking the user'" [dateTime]="_parent.blocked_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('blocked_at', $event)"></timepicker>
+                                    <timepicker id="blocked_at" [placeholderText]="'Nhấp để chọn ngày và giờ chặn the user'" [dateTime]="_parent.blocked_at | amDateFormat: 'YYYY-MM-DD HH:mm'" [dateTimeFormat]="'YYYY-MM-DD HH:mm'" [clearLabel]="'Clear'" [confirmLabel]="'Confirm'" (onChangedDateTime)="onChangeDateTime('blocked_at', $event)"></timepicker>
                                 </div><div class="clearfix"></div>
                                 <div class="col-sm-12" *ngIf="!_formErrors.blocked_at.valid">
                                     <span class="help-block help-block-error">{{_formErrors.blocked_at.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Blocked at field indicates the user has been blocked. If not empty, then user cannot log in to the system as the account is blocked. The value must be valid format - Y/M/D H:M:S. i.e. 2017-01-01 12:00:00</p>
+                                    <p class="help-text">* Cho biết phụ huynh đã bị chặn. Nếu nó được chọn, phụ huynh không thể đăng nhập vào hệ thống vì tài khoản bị chặn. Giá trị phải có định dạng hợp lệ - Y/M/D H:M:S. tức là 2017-01-01 12:00</p>
                                 </div>
                             </div>
 
@@ -127,7 +169,7 @@
 
                         <div class="form-group-wrapper">
                             <div class="form-group row">
-                                <label class="col-sm-12" for="status">Status <span class="required">*</span></label>
+                                <label class="col-sm-12" for="status">Trạng thái  <span class="required">*</span></label>
                                 <div class="col-sm-6">
                                     <select class="form-control" id="status" [formControl]="_form.controls['status']" [ngClass]="{'form-control-danger': !_isValid('status')}" [(ngModel)]="_parent.status">
                                         <option *ngFor="let statusType of _statusTypes" [value]="statusType.value" [selected]="">{{statusType.label}}</option>
@@ -137,7 +179,7 @@
                                     <span class="help-block help-block-error">{{_formErrors.status.message}}</span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p class="help-text">* Status field is configuring whether the user is active or disabled.</p>
+                                    <p class="help-text">* Trạng thái phụ huynh hoạt động hay không.</p>
                                 </div>
                             </div>
                         </div>
@@ -145,11 +187,11 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Save</button>
+                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Lưu</button>
                                 <div *ngIf="_submitted" class="spinner"></div>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a [routerLink]="['/parent']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Back to list</a>
+                                <a [routerLink]="['/parent']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
                             </div>
                             <div *ngIf="_errorMessage" class="col-xs-12 error-block mt-h">
                                 <div class="alert alert-danger">{{_errorMessage}}</div>
