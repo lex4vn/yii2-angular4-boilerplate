@@ -225,6 +225,19 @@ $config = [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/stage',
+                    'pluralize' => false,
+                    'tokens' => [
+                        '{id}' => '<id:\d+>',
+                    ],
+                    'extraPatterns' => [
+                        'OPTIONS {id}' => 'options',
+                        'OPTIONS kids' => 'options',
+                        'GET kids' => 'kids',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/setting',
                     'pluralize' => false,
                     'tokens' => [
