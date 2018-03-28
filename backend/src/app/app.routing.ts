@@ -69,6 +69,10 @@ export const routes: Routes = [
             {
                 path: 'article',
                 loadChildren: 'app/article/article.module#ArticleModule'
+            },
+            {
+                path: 'stage',
+                loadChildren: 'app/stage/stage.module#StageModule'
             }
         ]
     },

@@ -43,6 +43,7 @@ import {EventDataService} from './model/event-data.service';
 import {NoteDataService} from './model/note-data.service';
 import {ArticleDataService} from './model/article-data.service';
 import {ActivityDataService} from './model/activity-data.service';
+import {StageDataService} from './model/stage-data.service';
 
 @NgModule({
     imports: [
@@ -86,7 +87,8 @@ import {ActivityDataService} from './model/activity-data.service';
         ActivityDataService,
         NoteDataService,
         ArticleDataService,
-        EventDataService
+        EventDataService,
+        StageDataService
     ],
     bootstrap: [AppComponent]
 })

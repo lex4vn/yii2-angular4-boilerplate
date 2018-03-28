@@ -1,0 +1,95 @@
+<div class="row" *ngIf="_errorMessage">
+    <div class="col-sm-12">
+        <p class="alert alert-danger">{{_errorMessage}}</p>
+    </div>
+</div>
+<div class="animated fadeIn" *ngIf="!_mode && !_errorMessage">
+    <span class="spinner"></span>
+
+</div>
+<div class="animated fadeIn" *ngIf="_mode">
+    <div class="row">
+        <div class="col-sm-12">
+            <form [formGroup]="_form" (ngSubmit)="onSubmit()">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-create" *ngIf="_mode == 'create'">
+                            <strong>Đánh giá trạng thái</strong>
+                        </div>
+                        <div class="update" *ngIf="_mode == 'update'">
+                            <strong>Trang thái của - {{_stage.kid_name}}</strong><br />
+                            <small>Cập nhật</small>
+                        </div>
+                    </div>
+                    <div class="card-block">
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="kid_id">Học sinh <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="kid_id" [formControl]="_form.controls['kid_id']" [ngClass]="{'form-control-danger': !_isValid('kid_id')}" [(ngModel)]="_stage.kid_id">
+                                        <option *ngFor="let kid of _kids" [value]="kid.id" [selected]="">{{kid.kid_name}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.kid_id.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.kid_id.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Học sinh với nhận xét.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="class_id">Lớp học <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="class_id" [formControl]="_form.controls['class_id']" [ngClass]="{'form-control-danger': !_isValid('class_id')}" [(ngModel)]="_stage.class_id">
+                                        <option *ngFor="let clazz of _clazzes" [value]="clazz.id" [selected]="">{{clazz.name}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.class_id.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.class_id.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Chọn Lớp học.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="status">Trạng thái  <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="status" [formControl]="_form.controls['status']" [ngClass]="{'form-control-danger': !_isValid('status')}" [(ngModel)]="_stage.status">
+                                        <option *ngFor="let statusType of _statusTypes" [value]="statusType.value" [selected]="">{{statusType.label}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.status.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.status.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Trạng thái của nhận xét.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{_form.valid}}
+                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Lưu</button>
+                                <div *ngIf="_submitted" class="spinner"></div>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a [routerLink]="['/stage']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
+                            </div>
+                            <div *ngIf="_errorMessage" class="col-xs-12 error-block mt-h">
+                                <div class="alert alert-danger">{{_errorMessage}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
