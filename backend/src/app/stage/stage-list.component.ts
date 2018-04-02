@@ -38,6 +38,25 @@ export class StageListComponent implements OnInit{
                 }
             );
     }
+    public changeStage(status,stage:Stage):void {
+        stage.status = status;
+        this._stageDataService.updateStageById(stage)
+            .subscribe(
+                result => {
+                    this.getStages();
+                },
+                error =>  {
+                    // unauthorized access
+                    if(error.status == 401 || error.status == 403) {
+                        this._staffService.unauthorizedAccess(error);
+                    } else {
+                        this._errorMessage = error.data.message;
+                    }
+                    //resolve();
+
+                }
+            );
+    }
 
     public viewStage(stage:Stage):void {
         this._router.navigate(['/stage', stage.id]);

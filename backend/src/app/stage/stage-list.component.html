@@ -44,6 +44,17 @@
                                         'text-info': stage.status == 1,
                                         'text-danger': stage.status == 0 || stage.status == -1
                                     }">{{stage.status_label}}</span>
+                                    <button class="btn btn-success btn-sm" type="button" (click)="changeStage(1,stage)">
+                                        <i class="fa" [ngClass]="{'fa-check': stage.status == 1}"></i> Vui
+                                    </button>
+
+                                    <button class="btn btn-warning btn-sm" type="button" (click)="changeStage(2,stage)">
+                                        <i class="fa" [ngClass]="{'fa-check': stage.status == 2}"></i> Bình thường
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" type="button" (click)="changeStage(3,stage)">
+                                        <i class="fa" [ngClass]="{'fa-check': stage.status == 3}"></i> Buồn
+                                    </button>
+
                                 </td>
                                 <td class="text-xs-center">
                                     <div *ngIf="stage.status != -1">

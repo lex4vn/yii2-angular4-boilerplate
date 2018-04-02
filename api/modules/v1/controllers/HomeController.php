@@ -4,6 +4,7 @@ namespace app\modules\v1\controllers;
 use app\filters\auth\HttpBearerAuth;
 use app\models\Activity;
 use app\models\Event;
+use app\models\Stage;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -89,6 +90,8 @@ class HomeController extends ActiveController
         $user = User::findIdentity(\Yii::$app->user->getId());
 
         if ($user) {
+            $date = date('Y-m-d');
+
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(200);
             $events = Event::find()->limit(3)->all();
@@ -125,10 +128,12 @@ class HomeController extends ActiveController
                 'images' => $images,
             );
 
+            $stage = Stage::find()->where(['kid_id'=>$user->id,'commented_at'=>$date])->one();
+
             return [
                 'events' => $eventsResult,
                 'activity' => $activityResult,
-                'emotion' => 1
+                'emotion' => $stage ? $stage->status : 2
             ];
         } else {
             // Validation error
