@@ -6,14 +6,17 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class GlobalService{
     public apiHost:string;
+    public baseUrl:string;
 
     public setting:any = {};
 
     constructor(){
         if(environment.production == true) {
             this.apiHost = 'http://avengerapp.com/v1';
+            this.baseUrl = 'http://avengerapp.com/';
         } else {
             this.apiHost = 'http://localhost/kidschool/api/web/v1';
+            this.baseUrl = 'http://localhost/kidschool/api/web/';
         }
     }
 
