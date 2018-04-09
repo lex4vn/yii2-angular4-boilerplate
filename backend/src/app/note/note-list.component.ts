@@ -11,6 +11,7 @@ import {StaffService} from "../model/staff.service";
 })
 
 export class NoteListComponent implements OnInit{
+  public userData:any = {};
   private _notes:Note[];
   private _errorMessage:string;
 
@@ -19,6 +20,9 @@ export class NoteListComponent implements OnInit{
               private _router:Router) {}
 
   ngOnInit() {
+    let jwtValue:any = this._staffService.getJWTValue();
+    this.userData = jwtValue.data;
+
     this.getNotes();
   }
 

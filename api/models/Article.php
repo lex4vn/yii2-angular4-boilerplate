@@ -42,6 +42,7 @@ class Article extends ActiveRecord
     const STATUS_DISABLED = 0;
     const STATUS_PENDING = 1;
     const STATUS_ACTIVE = 10;
+    const STATUS_PUBLISHED = 10;
     /**
      * @var array
      */
