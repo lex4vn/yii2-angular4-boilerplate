@@ -15,8 +15,10 @@ export class GlobalService{
             this.apiHost = 'http://avengerapp.com/v1';
             this.baseUrl = 'http://avengerapp.com/';
         } else {
-            this.apiHost = 'http://localhost/kidschool/api/web/v1';
-            this.baseUrl = 'http://localhost/kidschool/api/web/';
+            //this.apiHost = 'http://localhost/kidschool/api/web/v1';
+            //this.baseUrl = 'http://localhost/kidschool/api/web/';
+            this.apiHost = 'http://avengerapp.com/v1';
+            this.baseUrl = 'http://avengerapp.com/';
         }
     }
 
