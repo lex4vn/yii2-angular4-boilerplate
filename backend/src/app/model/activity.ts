@@ -5,6 +5,7 @@ export class Activity{
     class_id:number;
     status:number;
     created_at:string;
+    images:[string];
 
     constructor(values: Object = {}) {
         Object.assign(this, values);

@@ -37,6 +37,30 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group-wrapper">
+                            <div class="drop-container" ngFileDrop [options]="options"
+                                 (uploadOutput)="onUploadOutput($event)"
+                                 [uploadInput]="uploadInput"
+                                 [ngClass]="{ 'is-drop-over': dragOver }">
+                                <h1>Drag &amp; Drop</h1>
+                            </div>
+                            <div id="upload-display"></div>
+                            <div>
+                            <label class="upload-button">
+                                <input type="file"
+                                       ngFileSelect [options]="options"
+                                       (uploadOutput)="onUploadOutput($event)"
+                                       [uploadInput]="uploadInput" multiple>
+                                or choose file(s)
+                            </label>
+
+                            <button type="button" class="start-upload-btn" (click)="startUpload()">
+                                Bắt đầu tải lên
+                            </button>
+                            </div>
+                        </div>
+
                         <div class="form-group-wrapper">
                             <div class="form-group row">
                                 <label class="col-sm-12" for="teacher_id">Giáo viên <span class="required">*</span></label>
