@@ -259,6 +259,18 @@ $config = [
                         'OPTIONS sse' => 'sse',
                     ]
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/freeday',
+                    'pluralize' => false,
+                    'tokens' => [
+                    ],
+                    'extraPatterns' => [
+                        'POST registerfreeday' => 'registerfreeday',
+                        'OPTIONS registerfreeday' => 'options'
+
+                    ]
+                ],
             ]
         ],
         'response' => [
