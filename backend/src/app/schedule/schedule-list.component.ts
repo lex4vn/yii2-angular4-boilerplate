@@ -40,6 +40,10 @@ export class ScheduleListComponent implements OnInit{
     }
 
     public viewSchedule(schedule:Schedule):void {
+        this._router.navigate(['/schedule/view', schedule.id]);
+    }
+
+    public updateSchedule(schedule:Schedule):void {
         this._router.navigate(['/schedule', schedule.id]);
     }
 

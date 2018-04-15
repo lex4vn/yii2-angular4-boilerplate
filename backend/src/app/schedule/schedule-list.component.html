@@ -44,6 +44,9 @@
                                 <td class="text-xs-center">
                                     <div *ngIf="schedule.status != -1">
                                         <button class="btn btn-primary btn-sm" type="button" (click)="viewSchedule(schedule)">
+                                            <i class="fa fa-eye"></i> Sửa
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" type="button" (click)="updateSchedule(schedule)">
                                             <i class="fa fa-edit"></i> Sửa
                                         </button>
                                         <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteSchedule(schedule)">

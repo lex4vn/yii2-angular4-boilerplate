@@ -26,7 +26,7 @@ const routes: Routes = [
                 }
             },
             {
-                path: ':id',
+                path: 'view/:id',
                 component: ScheduleFormComponent,
                 data: {
                     title: 'Cập nhật'
