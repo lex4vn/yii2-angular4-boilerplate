@@ -12,12 +12,14 @@ import {StaffService} from "../model/staff.service";
 export class ScheduleListComponent implements OnInit{
     private _schedules:Schedule[];
     private _errorMessage:string;
+    private _schedule_date:string;
 
     constructor(private _scheduleDataService:ScheduleDataService,
                 private _staffService:StaffService,
                 private _router:Router) {}
 
     ngOnInit() {
+        this._schedule_date = '';
         this.getSchedules();
     }
 

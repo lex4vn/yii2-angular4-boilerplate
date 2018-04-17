@@ -1,0 +1,188 @@
+<div class="row" *ngIf="_errorMessage">
+    <div class="col-sm-12">
+        <p class="alert alert-danger">{{_errorMessage}}</p>
+    </div>
+</div>
+<div class="animated fadeIn" *ngIf="!_mode && !_errorMessage">
+    <span class="spinner"></span>
+
+</div>
+<div class="animated fadeIn" *ngIf="_mode">
+    <div class="row">
+        <div class="col-sm-4">
+            <form [formGroup]="_form" (ngSubmit)="onSubmit()">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('title')}">
+                                <label class="col-sm-12" for="title">Tiêu đề </label>
+                                <div class="col-sm-12" *ngIf="!_formErrors.title.valid">
+                                    <span class="help-block help-block-error">{{_schedule.title}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="description">Mô tả</label>
+                                <div class="col-sm-6">
+                                    <p class="help-text">{{_schedule.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row" [ngClass]="{'has-danger': !_isValid('schedule_time')}">
+                                <label class="col-sm-12" for="schedule_time">Ngày (Y-M-D)</label>
+                                <div class="col-sm-6">
+                                    <timepicker id="schedule_time" [placeholderText]="'Nhấp để chọn ngày'" [dateTime]="_schedule.schedule_time | amDateFormat: 'YYYY-MM-DD'" [dateTimeFormat]="'YYYY-MM-DD'" [clearLabel]="'Xóa'" [confirmLabel]="'Xác nhận'" (onChangedDateTime)="onChangeDateTime('schedule_time', $event)"></timepicker>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.schedule_time.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.schedule_time.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Chọn ngày cần tạo thời khóa biểu</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="teacher_id">Giáo viên <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="teacher_id" [formControl]="_form.controls['teacher_id']" [ngClass]="{'form-control-danger': !_isValid('teacher_id')}" [(ngModel)]="_schedule.teacher_id">
+                                        <option *ngFor="let teacher of _teachers" [value]="teacher.id" [selected]="">{{teacher.username}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.teacher_id.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.teacher_id.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Giáo viên của lớp học.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="class_id">Lớp học <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="class_id" [formControl]="_form.controls['class_id']" [ngClass]="{'form-control-danger': !_isValid('class_id')}" [(ngModel)]="_schedule.class_id">
+                                        <option *ngFor="let clazz of _clazzes" [value]="clazz.id" [selected]="">{{clazz.name}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.class_id.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.class_id.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Chọn Lớp học.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="school_id">Trường<span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="school_id" [formControl]="_form.controls['school_id']" [ngClass]="{'form-control-danger': !_isValid('school_id')}" [(ngModel)]="_schedule.school_id">
+                                        <option *ngFor="let school of _schools" [value]="school.value" [selected]="">{{school.label}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.school_id.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.school_id.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Thuộc trường học nào.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-wrapper">
+                            <div class="form-group row">
+                                <label class="col-sm-12" for="status">Trạng thái  <span class="required">*</span></label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="status" [formControl]="_form.controls['status']" [ngClass]="{'form-control-danger': !_isValid('status')}" [(ngModel)]="_schedule.status">
+                                        <option *ngFor="let statusType of _statusTypes" [value]="statusType.value" [selected]="">{{statusType.label}}</option>
+                                    </select>
+                                </div><div class="clearfix"></div>
+                                <div class="col-sm-12" *ngIf="!_formErrors.status.valid">
+                                    <span class="help-block help-block-error">{{_formErrors.status.message}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="help-text">* Status field is configuring whether the schedule is active or disabled.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-sm btn-primary" [disabled]="!_form.valid || _submitted == true"><i class="fa fa-dot-circle-o"></i> Lưu</button>
+                                <div *ngIf="_submitted" class="spinner"></div>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a [routerLink]="['/schedule']" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
+                            </div>
+                            <div *ngIf="_errorMessage" class="col-xs-12 error-block mt-h">
+                                <div class="alert alert-danger">{{_errorMessage}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Chi tiết
+                </div>
+                <div class="card-block">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <tr>
+                                <th width="15%" class="text-xs-center">ID</th>
+                                <th>Mô tả</th>
+                                <th width="15%" class="text-xs-center">Bắt đầu</th>
+                                <th width="15%" class="text-xs-center">Kết thúc</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let schedule of _schedules">
+                                <td class="text-xs-center">
+                                    {{schedule.id}}
+                                </td>
+                                <td>
+                                    {{schedule.description}}
+                                </td>
+                                <td class="text-xs-center">
+                                    ({{schedule.schedulet_time}})
+                                </td>
+                                <td class="text-xs-center">
+                                    <div *ngIf="schedule.status != -1">
+                                        <button class="btn btn-primary btn-sm" type="button" (click)="updateSchedule(schedule)">
+                                            <i class="fa fa-edit"></i> Sửa
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" type="button" (click)="confirmDeleteSchedule(schedule)">
+                                            <i class="fa fa-remove"></i> Xóa
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary btn-sm" [routerLink]="['/schedule', 'create']" routerLinkActive="active">
+                        <i class="fa fa-plus-square"></i> Tạo </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

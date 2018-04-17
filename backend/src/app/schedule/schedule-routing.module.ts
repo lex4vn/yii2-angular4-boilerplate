@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {ScheduleListComponent} from './schedule-list.component';
 import {ScheduleFormComponent} from './schedule-form.component';
+import {ScheduleViewComponent} from './schedule-view.component';
 
 const routes: Routes = [
     {
@@ -27,9 +28,9 @@ const routes: Routes = [
             },
             {
                 path: 'view/:id',
-                component: ScheduleFormComponent,
+                component: ScheduleViewComponent,
                 data: {
-                    title: 'Cập nhật'
+                    title: 'Xem thời khoá biểu'
                 }
             },
             {
