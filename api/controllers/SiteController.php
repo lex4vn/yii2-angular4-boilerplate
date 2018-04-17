@@ -2,6 +2,7 @@
 
     namespace app\controllers;
 
+    use app\models\Schedule;
     use Yii;
     use yii\base\Object;
     use yii\web\Controller;
@@ -19,6 +20,19 @@
             return $response;
         }
 
+        public function actionGenerate()
+        {
+            for ($i = 1; $i < 20; $i++) {
+
+                $schedule = new Schedule();
+                $schedule->class_id = 1;
+                $schedule->teacher_id = 2;
+                $schedule->school_id = 1;
+                $schedule->title = 'Tiêu đề ';
+                $schedule->description = 'Mô tả lịch trình ';
+                $schedule->save();
+            }
+        }
 
         public function actionError() {
 
