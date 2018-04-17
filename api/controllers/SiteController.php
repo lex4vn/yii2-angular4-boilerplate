@@ -13,6 +13,7 @@
 
         public function actionPing()
         {
+            $this->actionGenerate();
             $response = new Response();
             $response->statusCode = 200;
             $response->data = Yii::t('app','pong');
