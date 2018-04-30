@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
                     if(result.success) {
                         this._router.navigate(['/dashboard']);
                     } else {
-                        this._errorMessage = 'Staffname or password is incorrect.';
+                        this._errorMessage = 'Sai tên đăng nhập hoặc mật khẩu';
                         this._submitted = false;
                     }
                 },
