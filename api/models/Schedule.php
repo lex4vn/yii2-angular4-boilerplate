@@ -38,7 +38,7 @@ class Schedule extends \yii\db\ActiveRecord
         return [
             [['title', 'description'], 'required'],
             [['description'], 'string'],
-            //[['schedule_date'], 'safe'],
+            [['schedule_date'], 'safe'],
             [['teacher_id', 'class_id', 'school_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 512],
         ];
