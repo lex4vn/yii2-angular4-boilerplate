@@ -114,7 +114,7 @@ class ScheduleController extends ActiveController
                     'status' => $schedule->status,
                     'schedule_date' => $schedule->schedule_date,
                     'details' => $schedule->details,
-                    'note' => $schedule->note->note,
+                    'note' => $schedule->note?$schedule->note->note:'',
                 );
             } else {
                 return null;
