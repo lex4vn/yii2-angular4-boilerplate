@@ -1,4 +1,5 @@
 <?php
+
 namespace app\modules\v1\controllers;
 
 use app\filters\auth\HttpBearerAuth;
@@ -16,6 +17,7 @@ use yii\web\NotFoundHttpException;
 class ScheduleController extends ActiveController
 {
     public $modelClass = 'app\models\Schedule';
+
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
@@ -99,16 +101,16 @@ class ScheduleController extends ActiveController
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(200);
 
-            $schedule = Schedule::find()->where(['schedule_date'=>$date])->one();
+            $schedule = Schedule::find()->where(['schedule_date' => $date])->one();
 
             if ($schedule) {
                 return array(
                     'id' => $schedule->id,
                     'title' => $schedule->title,
                     'class_id' => $schedule->class_id,
-                    'class_name' => $schedule->schoolClass->name,
+                    'class_name' => $schedule->schoolClass ? $schedule->schoolClass->name : '',
                     'teacher_id' => $schedule->teacher_id,
-                    'teacher_name' => $schedule->teacher->fullName,
+                    'teacher_name' => $schedule->teacher ? $schedule->teacher->fullName : '',
                     'status' => $schedule->status,
                     'schedule_date' => $schedule->schedule_date,
                     'details' => $schedule->details,
